@@ -1,0 +1,227 @@
+[
+  {
+    "name": "👥 Communication needed",
+    "color": "C7DCF9",
+    "description": "Communication needed."
+  },
+  {
+    "name": "👀 Review needed",
+    "color": "F7838D",
+    "description": "Review needed."
+  },
+  {
+    "name": "📢 Answer needed",
+    "color": "01B3B6",
+    "description": "Answer needed."
+  },
+  {
+    "name": "🙆🏻‍♂️ Merge needed",
+    "color": "01CC92",
+    "description": "Merge needed."
+  },
+  {
+    "name": "🏃 In review",
+    "color": "9ED447",
+    "description": "In review."
+  },
+  {
+    "name": "🎨 Improve code",
+    "color": "FF7181",
+    "description": "Improve structure / format of the code."
+  },
+  {
+    "name": "⚡️ Improve performance",
+    "color": "41C4FE",
+    "description": "Improve performance."
+  },
+  {
+    "name": "🔥 Remove code",
+    "color": "FF9E43",
+    "description": "Remove code or files."
+  },
+  {
+    "name": "🐛 Bug fix",
+    "color": "8CD842",
+    "description": "Fix a bug."
+  },
+  {
+    "name": "🚑️ Hotfix",
+    "color": "FA594A",
+    "description": "Critical hotfix."
+  },
+  {
+    "name": "✨ Feature",
+    "color": "FFE55F",
+    "description": "Introduce new features."
+  },
+  {
+    "name": "📝 Documentation",
+    "color": "00E776",
+    "description": "Add or update documentation."
+  },
+  {
+    "name": "🚀 Deploy",
+    "color": "04A8F0",
+    "description": "Deploy stuff."
+  },
+  {
+    "name": "✅ Test",
+    "color": "00DA48",
+    "description": "Add, update, or pass tests."
+  },
+  {
+    "name": "🔒️ Security",
+    "color": "FFCE49",
+    "description": "Fix security issues."
+  },
+  {
+    "name": "🔐 Secrets",
+    "color": "83BDEC",
+    "description": "Add or update secrets."
+  },
+  {
+    "name": "🔖 Release",
+    "color": "80DFEA",
+    "description": "Release / Version tags."
+  },
+  {
+    "name": "🚧 In progress",
+    "color": "FFB74D",
+    "description": "Work in progress."
+  },
+  {
+    "name": "⬇️ Downgrade version",
+    "color": "EF534F",
+    "description": "Downgrade dependencies."
+  },
+  {
+    "name": "⬆️ Upgrade version",
+    "color": "00E776",
+    "description": "Upgrade dependencies."
+  },
+  {
+    "name": "📌 Fix version",
+    "color": "3AC1F1",
+    "description": "Pin dependencies to specific versions."
+  },
+  {
+    "name": "♻️ Refactor code",
+    "color": "77E756",
+    "description": "Refactor code."
+  },
+  {
+    "name": "➕ Add dependency",
+    "color": "00E776",
+    "description": "description"
+  },
+  {
+    "name": "➖ Remove dependency",
+    "color": "EF534F",
+    "description": "Remove a dependency."
+  },
+  {
+    "name": "🔧 Configuration",
+    "color": "FFC302",
+    "description": "Add or update configuration files."
+  },
+  {
+    "name": "🌐 Globalization",
+    "color": "E6F4FF",
+    "description": "Internationalization and localization."
+  },
+  {
+    "name": "💩 Bad code",
+    "color": "A78674",
+    "description": "Write bad code that needs to be improved."
+  },
+  {
+    "name": "🚚 Move code",
+    "color": "EF584A",
+    "description": "Move or rename resources (e.g.: files, paths, routes).    "
+  },
+  {
+    "name": "🍱 Assets",
+    "color": "FF5864",
+    "description": "Add or update assets."
+  },
+  {
+    "name": "💡 Comments",
+    "color": "FFCE49",
+    "description": "Add or update comments in source code."
+  },
+  {
+    "name": "🗃️ Database",
+    "color": "C6E763",
+    "description": "Perform database related changes."
+  },
+  {
+    "name": "🔊 Add log",
+    "color": "22B3CF",
+    "description": "Add or update logs."
+  },
+  {
+    "name": "🔇 Add log",
+    "color": "E6EBEF",
+    "description": "Remove logs."
+  },
+  {
+    "name": "🏗️ Architecture",
+    "color": "FFE55F",
+    "description": "Make architectural changes."
+  },
+  {
+    "name": "🤡 Mock",
+    "color": "FF7181",
+    "description": "Mock things."
+  },
+  {
+    "name": "🙈 Git ignore",
+    "color": "8ADFE6",
+    "description": "Add or update a .gitignore file."
+  },
+  {
+    "name": "⚗️ Experiment",
+    "color": "7E39FB",
+    "description": "Perform experiments."
+  },
+  {
+    "name": "🥅 Error catch",
+    "color": "C7CB0F",
+    "description": "Catch errors."
+  },
+  {
+    "name": "🗑️ Deprecated code",
+    "color": "D9E3E7",
+    "description": "Deprecate code that needs to be cleaned up."
+  },
+  {
+    "name": "🛂 Authorization code",
+    "color": "4EC6DC",
+    "description": "Work on code related to authorization, roles and permissions."
+  },
+  {
+    "name": "🩹 Simple fix",
+    "color": "FBD0B6",
+    "description": "Simple fix for a non-critical issue."
+  },
+  {
+    "name": "🩺 Healthcheck",
+    "color": "77E756",
+    "description": "Add or update healthcheck."
+  },
+  {
+    "name": "🧱 Infrastructure",
+    "color": "FF6723",
+    "description": "Infrastructure related changes."
+  },
+  {
+    "name": "🧵 Concurrency",
+    "color": "FFBE7B",
+    "description": "Add or update code related to multithreading or concurrency."
+  },
+  {
+    "name": "🦺 Validation",
+    "color": "F2AD51",
+    "description": "Add or update code related to validation."
+  }
+]
