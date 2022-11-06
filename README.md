@@ -21,8 +21,25 @@
 
 ## Install
 
+**Dependencies 설치** :
+
 ```sh
+nvm use 16.16.0
 npm install
+```
+
+**Docker 이미지 빌드 및 실행** :
+
+```sh
+docker build -t jam_factory:latest .
+docker run -d -p 3306:3306 --name jam_factory jam_factory:latest
+```
+
+**DB 설계 (dbmate)** :
+
+```sh
+dbmate create JAM_FACTORY
+dbmate up
 ```
 
 ## Usage

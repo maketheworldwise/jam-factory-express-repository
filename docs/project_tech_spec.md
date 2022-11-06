@@ -4,12 +4,36 @@
 
 **💡 Language** :
 
-- NodeJS 16.16.0
+- NodeJs 16.16.0
+- Express 4.18.2
+- TypeScript 4.8.4
 - MySQL 8.0.31
 
 **💡 Libraries** :
 
+- mysql2 (dbmate)
+- cors
+- morgan
+- dotenv
+- nodemon (dev)
+
+### Database
+
+<details>
+<summary>2022.11.06</summary>
+<div markdown="1">
+<br>
+
+![](/docs/images/db_20221105.png)
+
+</div>
+</details>
+
 ### Technical Notes
+
+**💡 Environments** :
+
+- 개발시 로컬 환경만을 고려했습니다.
 
 **💡 Requirements** :
 
