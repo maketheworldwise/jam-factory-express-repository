@@ -9,6 +9,7 @@ const dataSource = mysql.createPool({
   database: process.env.DB_DATABASE,
   waitForConnections: true,
   connectionLimit: 10,
+  multipleStatements: true,
 });
 
 export default dataSource;
