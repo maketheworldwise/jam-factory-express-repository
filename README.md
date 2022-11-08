@@ -38,6 +38,11 @@ docker run -d -p 3306:3306 --name jam_factory jam_factory:latest
 **DB 설계 (dbmate)** :
 
 ```sh
+# 테스트용 DB
+dbmate create JAM_FACTORY_TEST
+dbmate --url "mysql://root:password@127.0.0.1:3306/JAM_FACTORY_TEST" up
+
+# 개발(QA) DB
 dbmate create JAM_FACTORY
 dbmate up
 ```
