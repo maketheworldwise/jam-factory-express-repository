@@ -33,7 +33,8 @@
 
 **💡 Environments** :
 
-- 개발시 로컬 환경만을 고려했습니다.
+- 테스트용 DB
+- 개발(QA) DB
 
 **💡 Requirements** :
 
