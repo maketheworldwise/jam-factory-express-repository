@@ -1,8 +1,8 @@
 import express from 'express';
-import testRouter from './testRouter';
+import signRouter from './signRouter';
 
 const router = express.Router();
 
-router.use('/test', testRouter);
+router.use('/', signRouter);
 
 export default router;
