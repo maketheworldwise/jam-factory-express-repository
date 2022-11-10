@@ -14,6 +14,7 @@ describe('SignController Test', () => {
     await dataSource.query(`
       SET FOREIGN_KEY_CHECKS = 0;
       TRUNCATE USER;
+      TRUNCATE TOKEN;
       SET FOREIGN_KEY_CHECKS = 1;
     `);
     await dataSource.end();
@@ -29,5 +30,15 @@ describe('SignController Test', () => {
         birth: '1994-11-22',
       })
       .expect(statusCode.CREATED);
+  });
+
+  test('로그인', async () => {
+    await request(app)
+      .post('/sign-in')
+      .send({
+        nickname: 'kevin',
+        password: '12345',
+      })
+      .expect(statusCode.OK);
   });
 });

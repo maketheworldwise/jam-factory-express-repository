@@ -1,5 +1,7 @@
 import dataSource from '../../../../../configs/db.config';
+import { SignInReqDto } from '../dtos/SignInReqDto';
 import { SignUpReqDto } from '../dtos/SignUpReqDto';
+import { TokenReqDto } from '../dtos/TokenReqDto';
 
 export class SignDao {
   public async signUp(reqDto: SignUpReqDto) {
@@ -17,5 +19,32 @@ export class SignDao {
       ]
     );
     return rows;
+  }
+
+  public async signIn(reqDto: SignInReqDto) {
+    const [rows, _] = await dataSource.query(
+      `SELECT id FROM USER WHERE nickname = ? AND password = ?`,
+      [reqDto.nickname, reqDto.password]
+    );
+    return rows;
+  }
+
+  public async updateToken(reqDto: TokenReqDto) {
+    await dataSource.query(
+      `INSERT INTO TOKEN(user_id, access_token, refresh_token, ip, device) VALUES (?, ?, ?, ?, ?)
+      ON DUPLICATE KEY UPDATE user_id = ?, access_token = ?, refresh_token = ?, ip = ?, device = ?`,
+      [
+        reqDto.user_id,
+        reqDto.access_token,
+        reqDto.refresh_token,
+        reqDto.ip,
+        reqDto.device,
+        reqDto.user_id,
+        reqDto.access_token,
+        reqDto.refresh_token,
+        reqDto.ip,
+        reqDto.device,
+      ]
+    );
   }
 }
