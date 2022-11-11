@@ -1,7 +1,6 @@
 import request from 'supertest';
 import createApp from '../../../../app';
 import dataSource from '../../../../configs/db.config';
-import { REFRESH_TOKEN_TYPE } from '../../../main/utils/constants';
 import statusCode from '../../../main/utils/resStatusCode';
 
 describe('SignController Test', () => {

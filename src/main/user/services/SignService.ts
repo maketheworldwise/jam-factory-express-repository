@@ -27,29 +27,28 @@ export class SignService {
       const rows: any = await signDao.signIn(reqDto);
       userId = rows[0].id;
 
-      if (userId) throw new SignUpFailedException(message.SIGN_IN_FAILED);
+      if (!userId) throw new SignUpFailedException(message.SIGN_IN_FAILED);
     } catch (err) {
       throw new SignUpFailedException(message.SIGN_IN_FAILED);
     }
 
     // 토큰 생성 및 업데이트 (토큰 재발급)
-    return this.updateToken(userId, ip, device);
+    const tokens = await this.createToken(userId);
+    await this.updateToken(userId, ip, device, tokens);
+    return tokens;
   }
 
   public async updateToken(
     userId: number,
     ip: string,
-    device: string
-  ): Promise<TokensDto> {
-    const tokens = await this.createToken(userId);
-
+    device: string,
+    tokens: TokensDto
+  ) {
     try {
       await signDao.updateToken(userId, ip, device, tokens);
     } catch (err) {
       throw new TokenUpdateFailedException(message.TOKEN_UPDATE_FAILED);
     }
-
-    return tokens;
   }
 
   public async createToken(userId: number): Promise<TokensDto> {
