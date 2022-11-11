@@ -1,6 +1,6 @@
 -- migrate:up
 CREATE TABLE `TOKEN` (
-  `id` bigint PRIMARY KEY AUTO_INCREMENT,
+  -- `id` bigint PRIMARY KEY AUTO_INCREMENT,
   `user_id` bigint,
   `access_token` text,
   `refresh_token` text,

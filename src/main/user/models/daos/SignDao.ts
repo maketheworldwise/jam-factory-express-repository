@@ -52,4 +52,16 @@ export class SignDao {
       ]
     );
   }
+
+  public async verifyTokenHost(
+    userId: number,
+    accessToken: string,
+    refreshToken: string
+  ) {
+    const [rows, _] = await dataSource.query(
+      `SELECT EXISTS(SELECT user_id FROM TOKEN WHERE user_id = ? AND access_token = ? AND refresh_token = ?) AS isValidHost`,
+      [userId, accessToken, refreshToken]
+    );
+    return rows;
+  }
 }

@@ -44,6 +44,10 @@ describe('SignController Test', () => {
       .expect(statusCode.OK)
       .then(res => {
         accessToken = res.body.data.accessToken;
+        refreshToken = res.header['set-cookie']
+          .toString()
+          .split(';')[0]
+          .split('=')[1];
       });
   });
 
@@ -52,5 +56,13 @@ describe('SignController Test', () => {
       .post('/verify-access-token')
       .set('Authorization', 'Bearer ' + accessToken)
       .expect(statusCode.OK);
+  });
+
+  test('토큰 재발급', async () => {
+    await request(app)
+      .post('/reissue-token')
+      .set('Authorization', 'Bearer ' + accessToken)
+      .set('Cookie', refreshToken)
+      .expect(statusCode.CREATED);
   });
 });

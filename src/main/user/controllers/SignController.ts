@@ -4,6 +4,7 @@ import {
   REFRESH_TOKEN_COOKIE_OPTIONS,
   REFRESH_TOKEN_TYPE,
 } from '../../utils/constants';
+import getHeaderInfo from '../../utils/headerUtils';
 import { getAccessToken } from '../../utils/jwtUtils';
 import message from '../../utils/resMessage';
 import result from '../../utils/resObject';
@@ -28,10 +29,10 @@ export class SignController {
    * @memberof SignController
    */
   public async signUp(req: Request, res: Response) {
-    const reqDto: SignUpReqDto = req.body;
+    const reqBodyDto: SignUpReqDto = req.body;
 
     try {
-      const userId = await signService.signUp(reqDto);
+      const userId = await signService.signUp(reqBodyDto);
 
       return res
         .status(statusCode.CREATED)
@@ -56,15 +57,13 @@ export class SignController {
    * @memberof SignController
    */
   public async signIn(req: Request, res: Response) {
-    const ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
-    const device = req.headers['user-agent'] || 'web';
-    const reqDto: SignInReqDto = req.body;
+    const reqHeaderDto = getHeaderInfo(req);
+    const reqBodyDto: SignInReqDto = req.body;
 
     try {
       const { accessToken, refreshToken } = await signService.signIn(
-        ip,
-        device,
-        reqDto
+        reqHeaderDto,
+        reqBodyDto
       );
       res.cookie(
         REFRESH_TOKEN_TYPE,
@@ -96,7 +95,7 @@ export class SignController {
    */
   public async verifyAccessToken(req: Request, res: Response) {
     try {
-      const accessToken = getAccessToken(req.headers.authorization);
+      const accessToken = getAccessToken(req.headers.authorization) || '';
       const jwtPayload = await signService.verifyToken(
         ACCESS_TOKEN_TYPE,
         accessToken
@@ -106,13 +105,52 @@ export class SignController {
         .status(statusCode.OK)
         .send(result.success(message.VALIDATE_TOKEN_SUCCESS, jwtPayload));
     } catch (err: any) {
-      console.log(err.message);
       return res
         .status(statusCode.INTERNAL_SERVER_ERROR)
         .send(result.fail(err.message));
     }
   }
 
-  // 토큰 재발급 (자동 로그인)
-  // 로그아웃시 토큰 데이터 삭제
+  /**
+   * 토큰 재발급 (자동 로그인) : [POST] http://localhost:8080/reissue-token
+   *
+   * @version 1.0.0
+   * @since 1.0.0
+   * @author Kevin Ahn
+   *
+   * @param {Request} req (authorization, cookie)
+   * @param {Response} res
+   * @return {*}
+   * @memberof SignController
+   */
+  public async reissueToken(req: Request, res: Response) {
+    try {
+      const reqHeaderDto = getHeaderInfo(req);
+      const jwtPayload: any = await signService.verifyToken(
+        REFRESH_TOKEN_TYPE,
+        reqHeaderDto.refreshToken
+      );
+      const userId = jwtPayload.userId;
+
+      const { accessToken, refreshToken } = await signService.reissueToken(
+        userId,
+        reqHeaderDto
+      );
+      res.cookie(
+        REFRESH_TOKEN_TYPE,
+        refreshToken,
+        REFRESH_TOKEN_COOKIE_OPTIONS
+      );
+
+      return res
+        .status(statusCode.CREATED)
+        .send(result.success(message.SIGN_IN_SUCCESS, { accessToken }));
+    } catch (err: any) {
+      return res
+        .status(statusCode.INTERNAL_SERVER_ERROR)
+        .send(result.fail(err.message));
+    }
+  }
+
+  // 로그아웃 (토큰 데이터 삭제)
 }
