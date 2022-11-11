@@ -1,10 +1,13 @@
 import request from 'supertest';
 import createApp from '../../../../app';
 import dataSource from '../../../../configs/db.config';
+import { REFRESH_TOKEN_TYPE } from '../../../main/utils/constants';
 import statusCode from '../../../main/utils/resStatusCode';
 
 describe('SignController Test', () => {
   let app: any;
+  let accessToken: string;
+  let refreshToken: string;
 
   beforeAll(async () => {
     app = createApp();
@@ -39,6 +42,16 @@ describe('SignController Test', () => {
         nickname: 'kevin',
         password: '12345',
       })
+      .expect(statusCode.OK)
+      .then(res => {
+        accessToken = res.body.data.accessToken;
+      });
+  });
+
+  test('Access 토큰 검증', async () => {
+    await request(app)
+      .post('/verify-access-token')
+      .set('Authorization', 'Bearer ' + accessToken)
       .expect(statusCode.OK);
   });
 });

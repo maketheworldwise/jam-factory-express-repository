@@ -1,56 +1,68 @@
 import { ACCESS_TOKEN_TYPE, REFRESH_TOKEN_TYPE } from '../../utils/constants';
-import { createToken } from '../../utils/jwtUtils';
+import { createToken, decodeToken } from '../../utils/jwtUtils';
 import message from '../../utils/resMessage';
-import UserNotExistException from '../exceptions/UserNotExistException';
+import SignUpFailedException from '../exceptions/SignUpFailedException';
 import { SignDao } from '../models/daos/SignDao';
 import { SignInReqDto } from '../models/dtos/SignInReqDto';
-import { SignInResDto } from '../models/dtos/SignInResDto';
+import { TokensDto } from '../models/dtos/TokensDto';
 import { SignUpReqDto } from '../models/dtos/SignUpReqDto';
-import { TokenReqDto } from '../models/dtos/TokenReqDto';
+import TokenUpdateFailedException from '../exceptions/TokenUpdateFailedException';
 
 const signDao = new SignDao();
 
 export class SignService {
   public async signUp(reqDto: SignUpReqDto) {
-    return await signDao.signUp(reqDto);
+    try {
+      return await signDao.signUp(reqDto);
+    } catch (err) {
+      throw new SignUpFailedException(message.SIGN_UP_FAILED);
+    }
   }
 
   public async signIn(ip: any, device: any, reqDto: SignInReqDto) {
-    let user_id: number;
+    let userId: number;
 
+    // 회원가입
     try {
       const rows: any = await signDao.signIn(reqDto);
-      user_id = rows[0].id;
+      userId = rows[0].id;
+
+      if (userId) throw new SignUpFailedException(message.SIGN_IN_FAILED);
     } catch (err) {
-      throw new UserNotExistException(message.USER_NOT_EXIST);
+      throw new SignUpFailedException(message.SIGN_IN_FAILED);
     }
 
-    // 토큰 생성
-    const { access_token, refresh_token } = await this.createToken(user_id);
-    const resDto: SignInResDto = {
-      access_token,
-      refresh_token,
-    };
-
-    // 토큰 업데이트
-    const tokenDto: TokenReqDto = {
-      ...resDto,
-      user_id,
-      ip,
-      device,
-    };
-    await signDao.updateToken(tokenDto);
-
-    return resDto;
+    // 토큰 생성 및 업데이트 (토큰 재발급)
+    return this.updateToken(userId, ip, device);
   }
 
-  public async createToken(userId: number) {
-    const access_token = createToken(ACCESS_TOKEN_TYPE, userId);
-    const refresh_token = createToken(REFRESH_TOKEN_TYPE, userId);
+  public async updateToken(
+    userId: number,
+    ip: string,
+    device: string
+  ): Promise<TokensDto> {
+    const tokens = await this.createToken(userId);
+
+    try {
+      await signDao.updateToken(userId, ip, device, tokens);
+    } catch (err) {
+      throw new TokenUpdateFailedException(message.TOKEN_UPDATE_FAILED);
+    }
+
+    return tokens;
+  }
+
+  public async createToken(userId: number): Promise<TokensDto> {
+    const accessToken = createToken(ACCESS_TOKEN_TYPE, userId);
+    const refreshToken = createToken(REFRESH_TOKEN_TYPE, userId);
 
     return {
-      access_token,
-      refresh_token,
+      accessToken,
+      refreshToken,
     };
+  }
+
+  public async verifyToken(tokenType: string, accessToken: any) {
+    return await decodeToken(tokenType, accessToken);
   }
 }

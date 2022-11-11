@@ -1,5 +1,5 @@
-const ACCESS_TOKEN_TYPE = 'access-token';
-const REFRESH_TOKEN_TYPE = 'refresh-token';
+const ACCESS_TOKEN_TYPE = 'accessToken';
+const REFRESH_TOKEN_TYPE = 'refreshToken';
 
 const REFRESH_TOKEN_COOKIE_OPTIONS = {
   httpOnly: true,

@@ -1,7 +1,7 @@
 import dataSource from '../../../../../configs/db.config';
 import { SignInReqDto } from '../dtos/SignInReqDto';
+import { TokensDto } from '../dtos/TokensDto';
 import { SignUpReqDto } from '../dtos/SignUpReqDto';
-import { TokenReqDto } from '../dtos/TokenReqDto';
 
 export class SignDao {
   public async signUp(reqDto: SignUpReqDto) {
@@ -10,9 +10,9 @@ export class SignDao {
       [
         reqDto.nickname,
         reqDto.password,
-        reqDto.zip_code,
-        reqDto.address_main,
-        reqDto.address_sub,
+        reqDto.zipCode,
+        reqDto.addressMain,
+        reqDto.addressSub,
         reqDto.phone,
         reqDto.email,
         reqDto.birth,
@@ -29,21 +29,26 @@ export class SignDao {
     return rows;
   }
 
-  public async updateToken(reqDto: TokenReqDto) {
+  public async updateToken(
+    userId: number,
+    ip: string,
+    device: string,
+    tokens: TokensDto
+  ) {
     await dataSource.query(
-      `INSERT INTO TOKEN(user_id, access_token, refresh_token, ip, device) VALUES (?, ?, ?, ?, ?)
-      ON DUPLICATE KEY UPDATE user_id = ?, access_token = ?, refresh_token = ?, ip = ?, device = ?`,
+      `INSERT INTO TOKEN(user_id, ip, device, access_token, refresh_token) VALUES (?, ?, ?, ?, ?)
+      ON DUPLICATE KEY UPDATE user_id = ?, ip = ?, device = ?, access_token = ?, refresh_token = ?`,
       [
-        reqDto.user_id,
-        reqDto.access_token,
-        reqDto.refresh_token,
-        reqDto.ip,
-        reqDto.device,
-        reqDto.user_id,
-        reqDto.access_token,
-        reqDto.refresh_token,
-        reqDto.ip,
-        reqDto.device,
+        userId,
+        ip,
+        device,
+        tokens.accessToken,
+        tokens.refreshToken,
+        userId,
+        ip,
+        device,
+        tokens.accessToken,
+        tokens.refreshToken,
       ]
     );
   }

@@ -28,7 +28,7 @@ const decodeToken = (tokenType: string, token: string) => {
     const secret = getSecret(tokenType);
     jwt.verify(token, secret, (err, decoded) => {
       if (err) {
-        if (err.name !== 'TokenExpiredError') {
+        if (err.name === 'TokenExpiredError') {
           throw new TokenExpiredException(message.TOKEN_EXPIRED_ERROR);
         }
       }
@@ -48,4 +48,4 @@ const getRefreshToken = (cookies: { refreshToken: string | undefined }) => {
   return cookies?.refreshToken;
 };
 
-export { createToken, getAccessToken, getRefreshToken };
+export { createToken, decodeToken, getAccessToken, getRefreshToken };
