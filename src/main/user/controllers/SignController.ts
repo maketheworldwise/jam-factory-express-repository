@@ -31,11 +31,11 @@ export class SignController {
     const reqDto: SignUpReqDto = req.body;
 
     try {
-      const queryResult = await signService.signUp(reqDto);
+      const userId = await signService.signUp(reqDto);
 
       return res
         .status(statusCode.CREATED)
-        .send(result.success(message.SIGN_UP_SUCCESS, queryResult));
+        .send(result.success(message.SIGN_UP_SUCCESS, { userId }));
     } catch (err) {
       return res
         .status(statusCode.INTERNAL_SERVER_ERROR)

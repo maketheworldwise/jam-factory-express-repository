@@ -13,7 +13,9 @@ const signDao = new SignDao();
 export class SignService {
   public async signUp(reqDto: SignUpReqDto) {
     try {
-      return await signDao.signUp(reqDto);
+      const rows: any = await signDao.signUp(reqDto);
+      const userId = rows.insertId;
+      return userId;
     } catch (err) {
       throw new SignUpFailedException(message.SIGN_UP_FAILED);
     }
