@@ -5,6 +5,8 @@ import statusCode from '../../../main/utils/resStatusCode';
 
 describe('SignController Test', () => {
   let app: any;
+  let accessToken: string;
+  let refreshToken: string;
 
   beforeAll(async () => {
     app = createApp();
@@ -14,6 +16,7 @@ describe('SignController Test', () => {
     await dataSource.query(`
       SET FOREIGN_KEY_CHECKS = 0;
       TRUNCATE USER;
+      TRUNCATE TOKEN;
       SET FOREIGN_KEY_CHECKS = 1;
     `);
     await dataSource.end();
@@ -28,6 +31,38 @@ describe('SignController Test', () => {
         phone: '01012345678',
         birth: '1994-11-22',
       })
+      .expect(statusCode.CREATED);
+  });
+
+  test('로그인', async () => {
+    await request(app)
+      .post('/sign-in')
+      .send({
+        nickname: 'kevin',
+        password: '12345',
+      })
+      .expect(statusCode.OK)
+      .then(res => {
+        accessToken = res.body.data.accessToken;
+        refreshToken = res.header['set-cookie']
+          .toString()
+          .split(';')[0]
+          .split('=')[1];
+      });
+  });
+
+  test('Access 토큰 검증', async () => {
+    await request(app)
+      .post('/verify-access-token')
+      .set('Authorization', 'Bearer ' + accessToken)
+      .expect(statusCode.OK);
+  });
+
+  test('토큰 재발급', async () => {
+    await request(app)
+      .post('/reissue-token')
+      .set('Authorization', 'Bearer ' + accessToken)
+      .set('Cookie', refreshToken)
       .expect(statusCode.CREATED);
   });
 });

@@ -4,8 +4,20 @@ const message = {
   BAD_REQUEST: '잘못된 요청입니다.',
   INTERNAL_SERVER_ERROR: '서버 내부 오류입니다.',
 
+  // 토큰 메시지
+  VALIDATE_TOKEN_SUCCESS: '토큰 검증을 성공했습니다.',
+  TOKEN_UPDATE_FAILED: '토큰 업데이트를 실패했습니다.',
+
+  TOKEN_EXPIRED_ERROR: '토큰이 만료되었습니다.',
+  TOKEN_TYPE_ERROR: '올바르지 않은 토큰 형식입니다.',
+  TOKEN_HOST_MISMATCH_ERROR: '회원과 토큰 정보가 매칭되지 않습니다.',
+
   // 회원 메시지
-  CREATE_USER_SUCCESS: '회원가입을 성공했습니다.',
+  SIGN_UP_SUCCESS: '회원가입을 성공했습니다.',
+  SIGN_UP_FAILED: '회원가입을 실패했습니다.',
+  SIGN_IN_SUCCESS: '로그인을 성공했습니다.',
+  SIGN_IN_FAILED: '로그인을 실패했습니다.',
+  SIGN_IN_AGAIN: '다시 로그인해주세요.',
 };
 
 export default message;

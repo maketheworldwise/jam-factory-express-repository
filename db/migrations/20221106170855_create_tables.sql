@@ -9,8 +9,8 @@ CREATE TABLE `USER` (
   `phone` varchar(11) NOT NULL,
   `email` varchar(320),
   `birth` date NOT NULL,
-  `created_at` datetime DEFAULT (now()),
-  `updated_at` datetime DEFAULT (now())
+  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
 CREATE TABLE `PRODUCT` (
@@ -27,8 +27,8 @@ CREATE TABLE `PRODUCT_REVIEW` (
   `product_id` bigint,
   `rating` int,
   `content` text,
-  `created_at` datetime DEFAULT (now()),
-  `updated_at` datetime DEFAULT (now())
+  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
 CREATE TABLE `SHOPPING_CART` (
@@ -36,8 +36,8 @@ CREATE TABLE `SHOPPING_CART` (
   `user_id` bigint,
   `product_id` bigint,
   `quantity` int DEFAULT 1,
-  `created_at` datetime DEFAULT (now()),
-  `updated_at` datetime DEFAULT (now())
+  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
 CREATE TABLE `PURCHASE_HISTORY` (
@@ -45,8 +45,8 @@ CREATE TABLE `PURCHASE_HISTORY` (
   `user_id` bigint,
   `product_id` bigint,
   `quantity` int DEFAULT 1,
-  `created_at` datetime DEFAULT (now()),
-  `updated_at` datetime DEFAULT (now())
+  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
 ALTER TABLE `PRODUCT_REVIEW` ADD FOREIGN KEY (`user_id`) REFERENCES `USER` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;

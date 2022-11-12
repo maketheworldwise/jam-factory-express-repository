@@ -1,4 +1,6 @@
 import dataSource from '../../../../../configs/db.config';
+import { SignInReqDto } from '../dtos/SignInReqDto';
+import { TokensDto } from '../dtos/TokensDto';
 import { SignUpReqDto } from '../dtos/SignUpReqDto';
 
 export class SignDao {
@@ -8,13 +10,57 @@ export class SignDao {
       [
         reqDto.nickname,
         reqDto.password,
-        reqDto.zip_code,
-        reqDto.address_main,
-        reqDto.address_sub,
+        reqDto.zipCode,
+        reqDto.addressMain,
+        reqDto.addressSub,
         reqDto.phone,
         reqDto.email,
         reqDto.birth,
       ]
+    );
+    return rows;
+  }
+
+  public async signIn(reqDto: SignInReqDto) {
+    const [rows, _] = await dataSource.query(
+      `SELECT id FROM USER WHERE nickname = ? AND password = ?`,
+      [reqDto.nickname, reqDto.password]
+    );
+    return rows;
+  }
+
+  public async updateToken(
+    userId: number,
+    ip: string,
+    device: string,
+    tokens: TokensDto
+  ) {
+    await dataSource.query(
+      `INSERT INTO TOKEN(user_id, ip, device, access_token, refresh_token) VALUES (?, ?, ?, ?, ?)
+      ON DUPLICATE KEY UPDATE user_id = ?, ip = ?, device = ?, access_token = ?, refresh_token = ?`,
+      [
+        userId,
+        ip,
+        device,
+        tokens.accessToken,
+        tokens.refreshToken,
+        userId,
+        ip,
+        device,
+        tokens.accessToken,
+        tokens.refreshToken,
+      ]
+    );
+  }
+
+  public async verifyTokenHost(
+    userId: number,
+    accessToken: string,
+    refreshToken: string
+  ) {
+    const [rows, _] = await dataSource.query(
+      `SELECT EXISTS(SELECT user_id FROM TOKEN WHERE user_id = ? AND access_token = ? AND refresh_token = ?) AS isValidHost`,
+      [userId, accessToken, refreshToken]
     );
     return rows;
   }
