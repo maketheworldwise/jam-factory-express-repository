@@ -1,9 +1,9 @@
 export interface SignUpReqDto {
   nickname: string;
   password: string;
-  zip_code?: number;
-  address_main?: string;
-  address_sub?: string;
+  zipCode?: number;
+  addressMain?: string;
+  addressSub?: string;
   phone: string;
   email?: string;
   birth: Date;
