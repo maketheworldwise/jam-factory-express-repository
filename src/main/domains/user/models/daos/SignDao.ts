@@ -29,6 +29,10 @@ export class SignDao {
     return rows;
   }
 
+  public async signOut(userId: number) {
+    await dataSource.query(`DELETE FROM TOKEN WHERE user_id = ?`, [userId]);
+  }
+
   public async updateToken(
     userId: number,
     ip: string,

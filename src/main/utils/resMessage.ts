@@ -24,6 +24,8 @@ const message = {
   SIGN_IN_SUCCESS: '로그인을 성공했습니다.',
   SIGN_IN_FAILED: '로그인을 실패했습니다.',
   SIGN_IN_AGAIN: '다시 로그인해주세요.',
+  SIGN_OUT_SUCCESS: '로그아웃을 성공했습니다.',
+  SIGN_OUT_FAILED: '로그아웃을 실패했습니다.',
 };
 
 export default message;
