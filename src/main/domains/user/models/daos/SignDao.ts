@@ -1,4 +1,4 @@
-import dataSource from '../../../../../configs/db.config';
+import dataSource from '../../../../../../configs/db.config';
 import { SignInReqDto } from '../dtos/SignInReqDto';
 import { TokensDto } from '../dtos/TokensDto';
 import { SignUpReqDto } from '../dtos/SignUpReqDto';
@@ -51,6 +51,14 @@ export class SignDao {
         tokens.refreshToken,
       ]
     );
+  }
+
+  public async verifyTokenUser(userId: number) {
+    const [rows, _] = await dataSource.query(
+      `SELECT EXISTS(SELECT nickname FROM USER WHERE id = ?) AS isValidUser`,
+      [userId]
+    );
+    return rows;
   }
 
   public async verifyTokenHost(
