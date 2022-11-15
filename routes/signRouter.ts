@@ -1,5 +1,6 @@
 import express from 'express';
 import setHeaderInfoInReq from '../middlewares/setHeaderInfoInReq';
+import verifyAccessToken from '../middlewares/verifyAccesToken';
 import { SignController } from '../src/main/user/controllers/SignController';
 
 const signRouter = express.Router();
@@ -10,6 +11,7 @@ signRouter.post('/sign-in', setHeaderInfoInReq, signController.signIn);
 signRouter.post(
   '/verify-access-token',
   setHeaderInfoInReq,
+  verifyAccessToken,
   signController.verifyAccessToken
 );
 signRouter.post(

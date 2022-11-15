@@ -1,11 +1,8 @@
 import { Request, Response } from 'express';
 import {
-  ACCESS_TOKEN_TYPE,
   REFRESH_TOKEN_COOKIE_OPTIONS,
   REFRESH_TOKEN_TYPE,
 } from '../../utils/constants';
-import getHeaderInfo from '../../utils/headerUtils';
-import { getAccessToken } from '../../utils/jwtUtils';
 import message from '../../utils/resMessage';
 import result from '../../utils/resObject';
 import statusCode from '../../utils/resStatusCode';
@@ -51,13 +48,13 @@ export class SignController {
    * @since 1.0.0
    * @author Kevin Ahn
    *
-   * @param {Request} req (nickname, password)
+   * @param {Request} req (*nickname, *password)
    * @param {Response} res
    * @return {*}
    * @memberof SignController
    */
   public async signIn(req: Request, res: Response) {
-    const reqHeaderDto = getHeaderInfo(req);
+    const reqHeaderDto = req.headerInfo;
     const reqBodyDto: SignInReqDto = req.body;
 
     try {
@@ -88,27 +85,16 @@ export class SignController {
    * @since 1.0.0
    * @author Kevin Ahn
    *
-   * @param {Request} req (authorization)
+   * @param {Request} req (*authorization)
    * @param {Response} res
    * @return {*}
    * @memberof SignController
    */
   public async verifyAccessToken(req: Request, res: Response) {
-    try {
-      const accessToken = getAccessToken(req.headers.authorization) || '';
-      const jwtPayload = await signService.verifyToken(
-        ACCESS_TOKEN_TYPE,
-        accessToken
-      );
-
-      return res
-        .status(statusCode.OK)
-        .send(result.success(message.VALIDATE_TOKEN_SUCCESS, jwtPayload));
-    } catch (err: any) {
-      return res
-        .status(statusCode.INTERNAL_SERVER_ERROR)
-        .send(result.fail(err.message));
-    }
+    const userId = req.userId;
+    return res
+      .status(statusCode.OK)
+      .send(result.success(message.VALIDATE_TOKEN_SUCCESS, { userId }));
   }
 
   /**
@@ -118,16 +104,15 @@ export class SignController {
    * @since 1.0.0
    * @author Kevin Ahn
    *
-   * @param {Request} req (authorization, cookie)
+   * @param {Request} req (*authorization, *cookie)
    * @param {Response} res
    * @return {*}
    * @memberof SignController
    */
   public async reissueToken(req: Request, res: Response) {
     try {
-      const reqHeaderDto = getHeaderInfo(req);
-      const jwtPayload: any = await signService.verifyToken(
-        REFRESH_TOKEN_TYPE,
+      const reqHeaderDto = req.headerInfo;
+      const jwtPayload: any = await signService.verifyRefreshToken(
         reqHeaderDto.refreshToken
       );
       const userId = jwtPayload.userId;
@@ -151,6 +136,4 @@ export class SignController {
         .send(result.fail(err.message));
     }
   }
-
-  // 로그아웃 (토큰 데이터 삭제)
 }

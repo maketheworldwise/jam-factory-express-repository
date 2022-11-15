@@ -53,6 +53,14 @@ export class SignDao {
     );
   }
 
+  public async verifyTokenUser(userId: number) {
+    const [rows, _] = await dataSource.query(
+      `SELECT EXISTS(SELECT nickname FROM USER WHERE id = ?) AS isValidUser`,
+      [userId]
+    );
+    return rows;
+  }
+
   public async verifyTokenHost(
     userId: number,
     accessToken: string,
