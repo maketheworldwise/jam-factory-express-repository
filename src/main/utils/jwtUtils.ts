@@ -1,6 +1,6 @@
 import jwt, { JwtPayload } from 'jsonwebtoken';
-import TokenExpiredException from '../user/exceptions/TokenExpiredException';
-import TokenTypeException from '../user/exceptions/TokenTypeException';
+import TokenExpiredException from '../exceptions/user/TokenExpiredException';
+import TokenTypeException from '../exceptions/user/TokenTypeException';
 import { ACCESS_TOKEN_TYPE, REFRESH_TOKEN_TYPE } from './constants';
 import message from './resMessage';
 

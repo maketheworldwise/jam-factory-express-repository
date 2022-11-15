@@ -8,11 +8,17 @@ const message = {
   VALIDATE_TOKEN_SUCCESS: '토큰 검증을 성공했습니다.',
   TOKEN_UPDATE_FAILED: '토큰 업데이트를 실패했습니다.',
 
+  TOKEN_NOT_EXIST_ERROR: '토큰 정보가 존재하지 않습니다.',
   TOKEN_EXPIRED_ERROR: '토큰이 만료되었습니다.',
   TOKEN_TYPE_ERROR: '올바르지 않은 토큰 형식입니다.',
+
+  TOKEN_HOST_FETCH_FAILED: '회원과 토큰 정보를 가져오는데 실패하였습니다.',
   TOKEN_HOST_MISMATCH_ERROR: '회원과 토큰 정보가 매칭되지 않습니다.',
 
   // 회원 메시지
+  USER_FETCH_FAILED: '회원 정보를 가져오는데 실패했습니다.',
+  USER_NOT_FOUND_ERROR: '회원의 정보가 존재하지 않습니다.',
+
   SIGN_UP_SUCCESS: '회원가입을 성공했습니다.',
   SIGN_UP_FAILED: '회원가입을 실패했습니다.',
   SIGN_IN_SUCCESS: '로그인을 성공했습니다.',

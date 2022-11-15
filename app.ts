@@ -2,6 +2,8 @@ import express from 'express';
 import cors from 'cors';
 import morgan from 'morgan';
 import routes from './routes';
+import cookieParser from 'cookie-parser';
+import logger from './middlewares/logger';
 
 const createApp = () => {
   const app = express();
@@ -9,6 +11,8 @@ const createApp = () => {
   app.use(routes);
   app.use(cors());
   app.use(morgan('combined'));
+  app.use(cookieParser());
+  app.use(logger);
 
   return app;
 };
