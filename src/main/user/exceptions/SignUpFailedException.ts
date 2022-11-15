@@ -1,6 +1,9 @@
-class SignUpFailedException extends Error {
+import RunTimeException from '../../RunTimeException';
+import statusCode from '../../utils/resStatusCode';
+
+class SignUpFailedException extends RunTimeException {
   constructor(message: string) {
-    super(message);
+    super(statusCode.DB_ERROR, message);
   }
 }
 

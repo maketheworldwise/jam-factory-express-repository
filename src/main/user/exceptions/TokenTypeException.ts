@@ -1,6 +1,9 @@
-class TokenTypeException extends Error {
+import RunTimeException from '../../RunTimeException';
+import statusCode from '../../utils/resStatusCode';
+
+class TokenTypeException extends RunTimeException {
   constructor(message: string) {
-    super(message);
+    super(statusCode.BAD_REQUEST, message);
   }
 }
 

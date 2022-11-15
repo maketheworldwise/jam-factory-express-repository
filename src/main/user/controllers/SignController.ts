@@ -27,18 +27,11 @@ export class SignController {
    */
   public async signUp(req: Request, res: Response) {
     const reqBodyDto: SignUpReqDto = req.body;
+    const userId = await signService.signUp(reqBodyDto);
 
-    try {
-      const userId = await signService.signUp(reqBodyDto);
-
-      return res
-        .status(statusCode.CREATED)
-        .send(result.success(message.SIGN_UP_SUCCESS, { userId }));
-    } catch (err) {
-      return res
-        .status(statusCode.INTERNAL_SERVER_ERROR)
-        .send(result.fail(message.INTERNAL_SERVER_ERROR));
-    }
+    return res
+      .status(statusCode.CREATED)
+      .send(result.success(message.SIGN_UP_SUCCESS, { userId }));
   }
 
   /**
@@ -57,25 +50,17 @@ export class SignController {
     const reqHeaderDto = req.headerInfo;
     const reqBodyDto: SignInReqDto = req.body;
 
-    try {
-      const { accessToken, refreshToken } = await signService.signIn(
-        reqHeaderDto,
-        reqBodyDto
-      );
-      res.cookie(
-        REFRESH_TOKEN_TYPE,
-        refreshToken,
-        REFRESH_TOKEN_COOKIE_OPTIONS
-      );
+    const { accessToken, refreshToken } = await signService.signIn(
+      reqHeaderDto,
+      reqBodyDto
+    );
 
-      return res
-        .status(statusCode.OK)
-        .send(result.success(message.SIGN_IN_SUCCESS, { accessToken }));
-    } catch (err: any) {
-      return res
-        .status(statusCode.INTERNAL_SERVER_ERROR)
-        .send(result.fail(err.message));
-    }
+    res.clearCookie;
+    res.cookie(REFRESH_TOKEN_TYPE, refreshToken, REFRESH_TOKEN_COOKIE_OPTIONS);
+
+    return res
+      .status(statusCode.OK)
+      .send(result.success(message.SIGN_IN_SUCCESS, { accessToken }));
   }
 
   /**
@@ -92,6 +77,7 @@ export class SignController {
    */
   public async verifyAccessToken(req: Request, res: Response) {
     const userId = req.userId;
+
     return res
       .status(statusCode.OK)
       .send(result.success(message.VALIDATE_TOKEN_SUCCESS, { userId }));
@@ -110,30 +96,21 @@ export class SignController {
    * @memberof SignController
    */
   public async reissueToken(req: Request, res: Response) {
-    try {
-      const reqHeaderDto = req.headerInfo;
-      const jwtPayload: any = await signService.verifyRefreshToken(
-        reqHeaderDto.refreshToken
-      );
-      const userId = jwtPayload.userId;
+    const reqHeaderDto = req.headerInfo;
+    const jwtPayload: any = await signService.verifyRefreshToken(
+      reqHeaderDto.refreshToken
+    );
+    const userId = jwtPayload.userId;
+    const { accessToken, refreshToken } = await signService.reissueToken(
+      userId,
+      reqHeaderDto
+    );
 
-      const { accessToken, refreshToken } = await signService.reissueToken(
-        userId,
-        reqHeaderDto
-      );
-      res.cookie(
-        REFRESH_TOKEN_TYPE,
-        refreshToken,
-        REFRESH_TOKEN_COOKIE_OPTIONS
-      );
+    res.clearCookie;
+    res.cookie(REFRESH_TOKEN_TYPE, refreshToken, REFRESH_TOKEN_COOKIE_OPTIONS);
 
-      return res
-        .status(statusCode.CREATED)
-        .send(result.success(message.SIGN_IN_SUCCESS, { accessToken }));
-    } catch (err: any) {
-      return res
-        .status(statusCode.INTERNAL_SERVER_ERROR)
-        .send(result.fail(err.message));
-    }
+    return res
+      .status(statusCode.CREATED)
+      .send(result.success(message.SIGN_IN_SUCCESS, { accessToken }));
   }
 }

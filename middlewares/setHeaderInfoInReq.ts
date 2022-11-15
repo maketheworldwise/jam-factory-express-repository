@@ -14,19 +14,16 @@ const setHeaderInfoInReq = async (
     const ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
     const device = req.headers['user-agent'] || 'web';
     const accessToken = getAccessToken(req.headers.authorization) || '';
-    // Access 토큰이 없을 경우
     if (accessToken === undefined) {
       return res
         .status(statusCode.BAD_REQUEST)
         .send(result.fail(message.TOKEN_NOT_EXIST_ERROR));
     }
 
-    // 개발 환경: req.cookies (cookie-parser)
-    // 테스트 환경: req.headers.cookie (header.cookie에 refreshToken 값만 담을 수 있도록 구성)
     const refreshToken =
-      process.env.APPLICATION_ENVIRONMENT === 'dev'
-        ? getRefreshToken(req.cookies) || ''
-        : req.headers.cookie || '';
+      getRefreshToken(req.cookies) ||
+      req.headers.cookie?.toString().split(';')[0].split('=')[1] ||
+      '';
 
     const headerInfo: HeaderInfoReqDto = {
       ip,

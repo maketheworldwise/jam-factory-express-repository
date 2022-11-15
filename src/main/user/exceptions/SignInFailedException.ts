@@ -1,6 +1,9 @@
-class SignInFailedException extends Error {
+import RunTimeException from '../../RunTimeException';
+import statusCode from '../../utils/resStatusCode';
+
+class SignInFailedException extends RunTimeException {
   constructor(message: string) {
-    super(message);
+    super(statusCode.DB_ERROR, message);
   }
 }
 

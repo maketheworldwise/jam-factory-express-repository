@@ -1,6 +1,9 @@
-class UserFetchFailedException extends Error {
+import RunTimeException from '../../RunTimeException';
+import statusCode from '../../utils/resStatusCode';
+
+class UserFetchFailedException extends RunTimeException {
   constructor(message: string) {
-    super(message);
+    super(statusCode.DB_ERROR, message);
   }
 }
 

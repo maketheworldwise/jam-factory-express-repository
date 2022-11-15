@@ -44,10 +44,7 @@ describe('SignController Test', () => {
       .expect(statusCode.OK)
       .then(res => {
         accessToken = res.body.data.accessToken;
-        refreshToken = res.header['set-cookie']
-          .toString()
-          .split(';')[0]
-          .split('=')[1];
+        refreshToken = res.header['set-cookie'];
       });
   });
 
