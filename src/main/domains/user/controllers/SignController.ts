@@ -64,6 +64,28 @@ export class SignController {
   }
 
   /**
+   * 로그아웃 : [POST] http://localhost:8080/sign-out
+   *
+   * @version 1.0.0
+   * @since 1.0.0
+   * @author Kevin Ahn
+   *
+   * @param {Request} req (*authorization, *cookie)
+   * @param {Response} res
+   * @return {*}
+   * @memberof SignController
+   */
+  public async signOut(req: Request, res: Response) {
+    const reqHeaderDto = req.headerInfo;
+    await signService.signOut(reqHeaderDto);
+
+    res.clearCookie;
+    return res
+      .status(statusCode.NO_CONTENT)
+      .send(result.success(message.SIGN_OUT_SUCCESS));
+  }
+
+  /**
    * Access 토큰 검증 : [POST] http://localhost:8080/verify-access-token
    *
    * @version 1.0.0

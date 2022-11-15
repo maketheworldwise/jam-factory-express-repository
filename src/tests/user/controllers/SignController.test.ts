@@ -62,4 +62,12 @@ describe('SignController Test', () => {
       .set('Cookie', refreshToken)
       .expect(statusCode.CREATED);
   });
+
+  test('로그아웃', async () => {
+    await request(app)
+      .post('/sign-out')
+      .set('Authorization', 'Bearer ' + accessToken)
+      .set('Cookie', refreshToken)
+      .expect(statusCode.NO_CONTENT);
+  });
 });

@@ -14,6 +14,11 @@ signRouter.post(
   asyncHandler(signController.signIn)
 );
 signRouter.post(
+  '/sign-out',
+  setHeaderInfoInReq,
+  asyncHandler(signController.signOut)
+);
+signRouter.post(
   '/verify-access-token',
   setHeaderInfoInReq,
   verifyAccessToken,
