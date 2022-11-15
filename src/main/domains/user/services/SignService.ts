@@ -16,6 +16,7 @@ import SignInTryAgainException from '../../../exceptions/user/SignInTryAgainExce
 import UserNotFoundException from '../../../exceptions/user/UserNotFoundException';
 import UserFetchFailedException from '../../../exceptions/user/UserFetchFailedException';
 import TokenHostMisMatchException from '../../../exceptions/user/TokenHostMisMatchException';
+import SignOutFailedException from '../../../exceptions/user/SignOutFailedException';
 
 const signDao = new SignDao();
 
@@ -49,6 +50,20 @@ export class SignService {
       return this.registerToken(userId, reqHeaderDto);
     } catch (err) {
       throw new SignInFailedException(message.SIGN_IN_FAILED);
+    }
+  }
+
+  public async signOut(reqHeaderDto: HeaderInfoReqDto) {
+    try {
+      const jwtPayload: any = await decodeToken(
+        REFRESH_TOKEN_TYPE,
+        reqHeaderDto.refreshToken
+      );
+      const userId = jwtPayload.userId;
+
+      await signDao.signOut(userId);
+    } catch (err) {
+      throw new SignOutFailedException(message.SIGN_OUT_FAILED);
     }
   }
 
