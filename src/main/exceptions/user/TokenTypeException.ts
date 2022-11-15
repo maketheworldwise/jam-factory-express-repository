@@ -1,4 +1,4 @@
-import RunTimeException from '../../RunTimeException';
+import RunTimeException from '../../exceptions/RunTimeException';
 import statusCode from '../../utils/resStatusCode';
 
 class TokenTypeException extends RunTimeException {

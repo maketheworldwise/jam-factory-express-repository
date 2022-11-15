@@ -1,5 +1,5 @@
 import express from 'express';
-import { HeaderInfoReqDto } from '../../src/main/user/models/dtos/HeaderInfoReqDto';
+import { HeaderInfoReqDto } from '../../src/main/domains/user/models/dtos/HeaderInfoReqDto';
 
 declare global {
   namespace Express {

@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
-import { HeaderInfoReqDto } from '../src/main/user/models/dtos/HeaderInfoReqDto';
+import { HeaderInfoReqDto } from '../src/main/domains/user/models/dtos/HeaderInfoReqDto';
 import { getAccessToken, getRefreshToken } from '../src/main/utils/jwtUtils';
 import message from '../src/main/utils/resMessage';
 import result from '../src/main/utils/resObject';

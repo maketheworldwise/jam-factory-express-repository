@@ -2,7 +2,7 @@ import express from 'express';
 import asyncHandler from '../middlewares/asyncWrapper';
 import setHeaderInfoInReq from '../middlewares/setHeaderInfoInReq';
 import verifyAccessToken from '../middlewares/verifyAccesToken';
-import { SignController } from '../src/main/user/controllers/SignController';
+import { SignController } from '../src/main/domains/user/controllers/SignController';
 
 const signRouter = express.Router();
 const signController = new SignController();

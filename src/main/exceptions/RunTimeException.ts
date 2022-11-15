@@ -1,4 +1,4 @@
-import statusCode from './utils/resStatusCode';
+import statusCode from '../utils/resStatusCode';
 
 class RunTimeException extends Error {
   code = statusCode.INTERNAL_SERVER_ERROR;

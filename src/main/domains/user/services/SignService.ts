@@ -1,18 +1,21 @@
-import { ACCESS_TOKEN_TYPE, REFRESH_TOKEN_TYPE } from '../../utils/constants';
-import { createToken, decodeToken } from '../../utils/jwtUtils';
-import message from '../../utils/resMessage';
-import SignUpFailedException from '../exceptions/SignUpFailedException';
+import {
+  ACCESS_TOKEN_TYPE,
+  REFRESH_TOKEN_TYPE,
+} from '../../../utils/constants';
+import { createToken, decodeToken } from '../../../utils/jwtUtils';
+import message from '../../../utils/resMessage';
 import { SignDao } from '../models/daos/SignDao';
 import { SignInReqDto } from '../models/dtos/SignInReqDto';
 import { TokensDto } from '../models/dtos/TokensDto';
 import { SignUpReqDto } from '../models/dtos/SignUpReqDto';
-import TokenUpdateFailedException from '../exceptions/TokenUpdateFailedException';
-import SignInTryAgainException from '../exceptions/SignInTryAgainException';
-import TokenHostMisMatchException from '../exceptions/TokenHostMisMatchException';
 import { HeaderInfoReqDto } from '../models/dtos/HeaderInfoReqDto';
-import UserNotFoundException from '../exceptions/UserNotFoundException';
-import UserFetchFailedException from '../exceptions/UserFetchFailedException';
-import SignInFailedException from '../exceptions/SignInFailedException';
+import SignUpFailedException from '../../../exceptions/user/SignUpFailedException';
+import SignInFailedException from '../../../exceptions/user/SignInFailedException';
+import TokenUpdateFailedException from '../../../exceptions/user/TokenUpdateFailedException';
+import SignInTryAgainException from '../../../exceptions/user/SignInTryAgainException';
+import UserNotFoundException from '../../../exceptions/user/UserNotFoundException';
+import UserFetchFailedException from '../../../exceptions/user/UserFetchFailedException';
+import TokenHostMisMatchException from '../../../exceptions/user/TokenHostMisMatchException';
 
 const signDao = new SignDao();
 

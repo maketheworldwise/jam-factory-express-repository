@@ -1,4 +1,4 @@
-import RunTimeException from '../../RunTimeException';
+import RunTimeException from '../RunTimeException';
 import statusCode from '../../utils/resStatusCode';
 
 class SignInFailedException extends RunTimeException {

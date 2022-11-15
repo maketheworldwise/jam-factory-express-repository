@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
-import { SignService } from '../src/main/user/services/SignService';
+import { SignService } from '../src/main/domains/user/services/SignService';
 import { ACCESS_TOKEN_TYPE } from '../src/main/utils/constants';
 import { decodeToken } from '../src/main/utils/jwtUtils';
 import result from '../src/main/utils/resObject';

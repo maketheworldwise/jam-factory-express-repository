@@ -2,10 +2,10 @@ import { Request, Response } from 'express';
 import {
   REFRESH_TOKEN_COOKIE_OPTIONS,
   REFRESH_TOKEN_TYPE,
-} from '../../utils/constants';
-import message from '../../utils/resMessage';
-import result from '../../utils/resObject';
-import statusCode from '../../utils/resStatusCode';
+} from '../../../utils/constants';
+import message from '../../../utils/resMessage';
+import result from '../../../utils/resObject';
+import statusCode from '../../../utils/resStatusCode';
 import { SignInReqDto } from '../models/dtos/SignInReqDto';
 import { SignUpReqDto } from '../models/dtos/SignUpReqDto';
 import { SignService } from '../services/SignService';

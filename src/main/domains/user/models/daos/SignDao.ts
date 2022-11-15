@@ -1,4 +1,4 @@
-import dataSource from '../../../../../configs/db.config';
+import dataSource from '../../../../../../configs/db.config';
 import { SignInReqDto } from '../dtos/SignInReqDto';
 import { TokensDto } from '../dtos/TokensDto';
 import { SignUpReqDto } from '../dtos/SignUpReqDto';
