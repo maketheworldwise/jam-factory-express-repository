@@ -2,12 +2,12 @@
 CREATE TABLE `USER` (
   `id` bigint PRIMARY KEY AUTO_INCREMENT,
   `nickname` varchar(10) NOT NULL,
-  `password` varchar(10) NOT NULL,
+  `password` text NOT NULL,
   `zip_code` varchar(5),
   `address_main` varchar(45),
   `address_sub` varchar(45),
   `phone` varchar(11) NOT NULL,
-  `email` varchar(320),
+  `email` varchar(320) NOT NULL,
   `birth` date NOT NULL,
   `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP

@@ -20,7 +20,7 @@ export class SignController {
    * @since 1.0.0
    * @author Kevin Ahn
    *
-   * @param {Request} req (*nickname, *password, *phone, *birth, zipCode, addressMain, addressSub, email)
+   * @param {Request} req (*nickname, *password, *phone, *birth, zipCode, addressMain, addressSub, *email)
    * @param {Response} res
    * @return {*}
    * @memberof SignController

@@ -91,6 +91,35 @@
 
 </div>
 </details>
+<br>
+
+**📄 2022.12.18** :
+
+<details>
+<summary>Discussion</summary>
+<div markdown="1">
+<br>
+
+- 회원가입 유효성 검사
+  - 아이디: 숫자, 소문자, 대문자, 피리어드, 언더라인, 하이픈, 최소 길이 4, 최대 길이 20
+  - 비밀번호: 숫자, 소문자, 대문자, 피리어드, 언더라인, 하이픈, 최소 길이 4, 최대 길이 20
+  - 핸드폰: 010-000-0000, 010-0000-0000 형태
+  - 생년월일: 2022-01-01 형태
+  - 이메일: kevin@example.com 형태
+
+</div>
+</details>
+
+<details>
+<summary>Decision</summary>
+<div markdown="1">
+<br>
+
+- 회원가입 유효성 검사
+
+</div>
+</details>
+<br>
 
 ### References
 
