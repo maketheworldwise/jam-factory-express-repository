@@ -30,6 +30,7 @@ describe('SignController Test', () => {
         password: '12345',
         phone: '01012345678',
         birth: '1994-11-22',
+        email: 'kevin@example.com',
       })
       .expect(statusCode.CREATED);
   });

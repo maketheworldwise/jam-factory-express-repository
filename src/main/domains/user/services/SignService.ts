@@ -1,3 +1,4 @@
+import bcrypt from 'bcryptjs';
 import {
   ACCESS_TOKEN_TYPE,
   REFRESH_TOKEN_TYPE,
@@ -41,10 +42,11 @@ export class SignService {
   ) {
     try {
       // 로그인 후 토큰 발급
-      const rows: any = await signDao.signIn(reqBodyDto);
+      const rows: any = await signDao.signIn(reqBodyDto.nickname);
       const userId = rows[0].id;
+      const password = rows[0].password;
 
-      if (!userId) {
+      if (!userId || bcrypt.compareSync(reqBodyDto.password, password)) {
         throw new SignInFailedException(message.USER_NOT_FOUND_ERROR);
       }
       return this.registerToken(userId, reqHeaderDto);

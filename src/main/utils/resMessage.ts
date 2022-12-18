@@ -16,6 +16,7 @@ const message = {
   TOKEN_HOST_MISMATCH_ERROR: '회원과 토큰 정보가 매칭되지 않습니다.',
 
   // 회원 메시지
+  USER_INFO_REQUEST_ERROR: '필수적으로 필요한 회원의 정보가 올바르지 않습니다.',
   USER_FETCH_FAILED: '회원 정보를 가져오는데 실패했습니다.',
   USER_NOT_FOUND_ERROR: '회원의 정보가 존재하지 않습니다.',
 
