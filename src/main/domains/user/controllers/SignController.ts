@@ -86,6 +86,27 @@ export class SignController {
   }
 
   /**
+   * Nickname 검증 : [GET] http://localhost:8080/verify-nickname/:nickname
+   *
+   * @version 1.0.0
+   * @since 1.0.0
+   * @author Kevin Ahn
+   *
+   * @param {Request} req (*nickname)
+   * @param {Response} res
+   * @return {*}
+   * @memberof SignController
+   */
+  public async verifyNickname(req: Request, res: Response) {
+    const { nickname } = req.params;
+    await signService.verifyNickname(nickname);
+
+    return res
+      .status(statusCode.OK)
+      .send(result.success(message.VERIFY_NICKNAME_SUCCESS));
+  }
+
+  /**
    * Access 토큰 검증 : [POST] http://localhost:8080/verify-access-token
    *
    * @version 1.0.0
