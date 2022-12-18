@@ -20,6 +20,9 @@ const message = {
   USER_FETCH_FAILED: '회원 정보를 가져오는데 실패했습니다.',
   USER_NOT_FOUND_ERROR: '회원의 정보가 존재하지 않습니다.',
 
+  VERIFY_NICKNAME_SUCCESS: '사용 가능한 아이디입니다.',
+  VERIFY_NICKNAME_FAILED: '사용 불가능한 아이디입니다.',
+
   SIGN_UP_SUCCESS: '회원가입을 성공했습니다.',
   SIGN_UP_FAILED: '회원가입을 실패했습니다.',
   SIGN_IN_SUCCESS: '로그인을 성공했습니다.',

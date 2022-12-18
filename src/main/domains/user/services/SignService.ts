@@ -18,12 +18,15 @@ import UserNotFoundException from '../../../exceptions/user/UserNotFoundExceptio
 import UserFetchFailedException from '../../../exceptions/user/UserFetchFailedException';
 import TokenHostMisMatchException from '../../../exceptions/user/TokenHostMisMatchException';
 import SignOutFailedException from '../../../exceptions/user/SignOutFailedException';
+import NicknameDuplicateException from '../../../exceptions/user/NicknameDuplicateException';
 
 const signDao = new SignDao();
 
 export class SignService {
   public async signUp(reqBodyDto: SignUpReqDto) {
     try {
+      await this.verifyNickname(reqBodyDto.nickname);
+
       const rows: any = await signDao.signUp(reqBodyDto);
       const userId = rows.insertId;
 
@@ -118,16 +121,33 @@ export class SignService {
     }
   }
 
+  public async verifyNickname(nickname: string) {
+    let isNotValidNickname = false;
+
+    try {
+      const rows: any = await signDao.verifyNickname(nickname);
+      isNotValidNickname = rows[0].isNotValidNickname;
+    } catch (err) {
+      throw new UserFetchFailedException(message.USER_FETCH_FAILED);
+    }
+
+    if (isNotValidNickname) {
+      throw new NicknameDuplicateException(message.VERIFY_NICKNAME_FAILED);
+    }
+  }
+
   public async verifyTokenUser(userId: number) {
+    let isValidUser = true;
+
     try {
       const rows: any = await signDao.verifyTokenUser(userId);
-      const isValidUser = rows[0].isValidUser;
-
-      if (!isValidUser) {
-        throw new UserNotFoundException(message.USER_NOT_FOUND_ERROR);
-      }
+      isValidUser = rows[0].isValidUser;
     } catch {
       throw new UserFetchFailedException(message.USER_FETCH_FAILED);
+    }
+
+    if (!isValidUser) {
+      throw new UserNotFoundException(message.USER_NOT_FOUND_ERROR);
     }
   }
 

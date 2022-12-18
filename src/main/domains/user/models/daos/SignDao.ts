@@ -57,6 +57,14 @@ export class SignDao {
     );
   }
 
+  public async verifyNickname(nickname: string) {
+    const [rows, _] = await dataSource.query(
+      `SELECT EXISTS(SELECT id FROM USER WHERE nickname = ?) AS isNotValidNickname`,
+      [nickname]
+    );
+    return rows;
+  }
+
   public async verifyTokenUser(userId: number) {
     const [rows, _] = await dataSource.query(
       `SELECT EXISTS(SELECT nickname FROM USER WHERE id = ?) AS isValidUser`,
