@@ -21,10 +21,10 @@ export class SignDao {
     return rows;
   }
 
-  public async signIn(reqDto: SignInReqDto) {
+  public async signIn(nickname: string) {
     const [rows, _] = await dataSource.query(
-      `SELECT id FROM USER WHERE nickname = ? AND password = ?`,
-      [reqDto.nickname, reqDto.password]
+      `SELECT id, password FROM USER WHERE nickname = ?`,
+      [nickname]
     );
     return rows;
   }
