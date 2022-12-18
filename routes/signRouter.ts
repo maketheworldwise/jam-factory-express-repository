@@ -1,5 +1,5 @@
 import express from 'express';
-import asyncHandler from '../middlewares/asyncWrapper';
+import asyncWrapper from '../middlewares/asyncWrapper';
 import encryptPasswordReq from '../middlewares/encryptPasswordReq';
 import setHeaderInfoInReq from '../middlewares/setHeaderInfoInReq';
 import validateSignUpInfoReq from '../middlewares/validateSignUpInfoReq';
@@ -13,29 +13,33 @@ signRouter.post(
   '/sign-up',
   validateSignUpInfoReq,
   encryptPasswordReq,
-  asyncHandler(signController.signUp)
+  asyncWrapper(signController.signUp)
 );
 signRouter.post(
   '/sign-in',
   setHeaderInfoInReq,
   encryptPasswordReq,
-  asyncHandler(signController.signIn)
+  asyncWrapper(signController.signIn)
 );
 signRouter.post(
   '/sign-out',
   setHeaderInfoInReq,
-  asyncHandler(signController.signOut)
+  asyncWrapper(signController.signOut)
+);
+signRouter.get(
+  '/verify-nickname/:nickname',
+  asyncWrapper(signController.verifyNickname)
 );
 signRouter.post(
   '/verify-access-token',
   setHeaderInfoInReq,
   verifyAccessToken,
-  asyncHandler(signController.verifyAccessToken)
+  asyncWrapper(signController.verifyAccessToken)
 );
 signRouter.post(
   '/reissue-token',
   setHeaderInfoInReq,
-  asyncHandler(signController.reissueToken)
+  asyncWrapper(signController.reissueToken)
 );
 
 export default signRouter;

@@ -22,6 +22,10 @@ describe('SignController Test', () => {
     await dataSource.end();
   });
 
+  test('아이디 중복 확인 (성공)', async () => {
+    await request(app).get('/verify-nickname/kevin').expect(statusCode.OK);
+  });
+
   test('회원가입', async () => {
     await request(app)
       .post('/sign-up')
@@ -33,6 +37,12 @@ describe('SignController Test', () => {
         email: 'kevin@example.com',
       })
       .expect(statusCode.CREATED);
+  });
+
+  test('아이디 중복 확인 (실패)', async () => {
+    await request(app)
+      .get('/verify-nickname/kevin')
+      .expect(statusCode.BAD_REQUEST);
   });
 
   test('로그인', async () => {

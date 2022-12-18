@@ -1,8 +1,7 @@
 import { Request, Response } from 'express';
 import result from '../src/main/utils/resObject';
-import statusCode from '../src/main/utils/resStatusCode';
 
-const asyncHandler = (fn: any) => {
+const asyncWrapper = (fn: any) => {
   return async (req: Request, res: Response) => {
     try {
       await fn(req, res);
@@ -12,4 +11,4 @@ const asyncHandler = (fn: any) => {
   };
 };
 
-export default asyncHandler;
+export default asyncWrapper;
