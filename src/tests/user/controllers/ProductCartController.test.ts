@@ -68,4 +68,11 @@ describe('ProductCartController Test', () => {
       })
       .expect(statusCode.OK);
   });
+
+  test('제품 장바구니 삭제', async () => {
+    await request(app)
+      .delete('/cart/1')
+      .set('Authorization', 'Bearer ' + accessToken)
+      .expect(statusCode.NO_CONTENT);
+  });
 });
