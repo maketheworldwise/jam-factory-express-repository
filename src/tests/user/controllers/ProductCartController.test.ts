@@ -42,7 +42,7 @@ describe('ProductCartController Test', () => {
     await dataSource.end();
   });
 
-  test('장바구니 등록', async () => {
+  test('제품 장바구니 등록', async () => {
     await request(app)
       .post('/cart/product/1')
       .set('Authorization', 'Bearer ' + accessToken)
@@ -50,5 +50,12 @@ describe('ProductCartController Test', () => {
         quantity: 3,
       })
       .expect(statusCode.CREATED);
+  });
+
+  test('제품 장바구니 목록 조회', async () => {
+    await request(app)
+      .get('/cart/product')
+      .set('Authorization', 'Bearer ' + accessToken)
+      .expect(statusCode.OK);
   });
 });
