@@ -11,5 +11,6 @@ productRouter.get(
   setPagingInfoInReq,
   asyncWrapper(productController.getProductList)
 );
+productRouter.get('/:productId', asyncWrapper(productController.getProduct));
 
 export default productRouter;

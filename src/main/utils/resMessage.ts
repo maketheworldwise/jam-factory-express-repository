@@ -34,6 +34,9 @@ const message = {
   // 제품 메시지
   GET_PRODUCT_LIST_SUCCESS: '제품 목록 조회에 성공했습니다.',
   GET_PRODUCT_LIST_FAILED: '제품 목록 조회에 실패했습니다.',
+
+  GET_PRODUCT_SUCCESS: '제품 상세 조회에 성공했습니다.',
+  GET_PRODUCT_FAILED: '제품 상세 조회에 실패했습니다.',
 };
 
 export default message;
