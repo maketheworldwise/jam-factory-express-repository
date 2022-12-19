@@ -45,6 +45,9 @@ const message = {
 
   GET_PRODUCT_CART_LIST_SUCCESS: '장바구니 목록 조회에 성공했습니다.',
   GET_PRODUCT_CART_LIST_FAILED: '장바구니 목록 조회에 실패했습니다.',
+
+  PATCH_PRODUCT_CART_SUCCESS: '장바구니 수정을 성공했습니다.',
+  PATCH_PRODUCT_CART_FAILED: '장바구니 수정을 실패했습니다.',
 };
 
 export default message;

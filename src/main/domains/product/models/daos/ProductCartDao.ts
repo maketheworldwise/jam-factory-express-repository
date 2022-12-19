@@ -1,4 +1,5 @@
 import dataSource from '../../../../../../configs/db.config';
+import { PatchProductCartReqDto } from '../dtos/PatchProductCartReqDto';
 import { PostProductCartReqDto } from '../dtos/PostProductCartReqDto';
 
 export class ProductCartDao {
@@ -6,7 +7,7 @@ export class ProductCartDao {
     const { userId, productId, quantity } = reqDto;
     const [rows, _] = await dataSource.query(
       `INSERT INTO PRODUCT_CART(user_id, product_id, quantity) VALUES(?, ?, ?)`,
-      [Number(userId), Number(productId), Number(quantity)]
+      [userId, productId, quantity]
     );
 
     return rows;
@@ -24,8 +25,16 @@ export class ProductCartDao {
       FROM PRODUCT_CART 
       WHERE user_id = ?
       ORDER BY created_at DESC`,
-      [Number(userId)]
+      [userId]
     );
     return rows;
+  }
+
+  public async patchProductCart(reqDto: PatchProductCartReqDto) {
+    const { userId, productId, quantity } = reqDto;
+    await dataSource.query(
+      `UPDATE PRODUCT_CART SET quantity = ? WHERE user_id = ? AND product_id = ?`,
+      [quantity, userId, productId]
+    );
   }
 }

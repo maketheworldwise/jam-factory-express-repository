@@ -58,4 +58,14 @@ describe('ProductCartController Test', () => {
       .set('Authorization', 'Bearer ' + accessToken)
       .expect(statusCode.OK);
   });
+
+  test('제품 장바구니 수정', async () => {
+    await request(app)
+      .patch('/cart/product/1')
+      .set('Authorization', 'Bearer ' + accessToken)
+      .send({
+        quantity: 1,
+      })
+      .expect(statusCode.OK);
+  });
 });
