@@ -25,5 +25,11 @@ productCartRouter.patch(
   verifyAccessToken,
   asyncWrapper(productCartController.patchProductCart)
 );
+productCartRouter.delete(
+  '/:productCartId',
+  setHeaderInfoInReq,
+  verifyAccessToken,
+  asyncWrapper(productCartController.deleteProductCart)
+);
 
 export default productCartRouter;

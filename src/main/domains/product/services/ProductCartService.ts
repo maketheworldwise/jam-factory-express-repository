@@ -1,3 +1,4 @@
+import ProductCartDeleteFailedException from '../../../exceptions/product/ProductCartDeleteFailedException';
 import ProductCartFetchFailedException from '../../../exceptions/product/ProductCartFetchFailedException';
 import ProductCartRegisterFailedException from '../../../exceptions/product/ProductCartRegisterFailedException';
 import ProductCartUpdateFailedException from '../../../exceptions/product/ProductCartUpdateFailedException';
@@ -45,6 +46,16 @@ export class ProductCartService {
     } catch (err) {
       throw new ProductCartUpdateFailedException(
         message.PATCH_PRODUCT_CART_FAILED
+      );
+    }
+  }
+
+  public async deleteProductCart(productCartId: number) {
+    try {
+      await productCartDao.deleteProductCart(productCartId);
+    } catch (err) {
+      throw new ProductCartDeleteFailedException(
+        message.DELETE_PRODUCT_CART_FAILED
       );
     }
   }
