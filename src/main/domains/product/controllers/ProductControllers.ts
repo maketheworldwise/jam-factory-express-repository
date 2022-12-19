@@ -20,12 +20,8 @@ export class ProductController {
    * @memberof ProductController
    */
   public async getProductList(req: Request, res: Response) {
-    // TODO: 필터링 및 페이징 처리 (페이징 정보만을 수집하는 미들웨어 등록 여부 고민 필요)
-    //
-    // 필터링 기준: 미정
-    // 페이징 단위: 12
-
-    const productList = await productService.getProductList();
+    // TODO: 필터링 (기준 미정)
+    const productList = await productService.getProductList(req.pagingInfo);
 
     return res
       .status(statusCode.OK)

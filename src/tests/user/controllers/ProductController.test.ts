@@ -5,8 +5,6 @@ import statusCode from '../../../main/utils/resStatusCode';
 
 describe('ProductController Test', () => {
   let app: any;
-  let accessToken: string;
-  let refreshToken: string;
 
   beforeAll(async () => {
     app = createApp();
@@ -22,6 +20,6 @@ describe('ProductController Test', () => {
   });
 
   test('제품 목록 조회', async () => {
-    await request(app).get('/product').expect(statusCode.OK);
+    await request(app).get('/product?page=0&size=1').expect(statusCode.OK);
   });
 });
