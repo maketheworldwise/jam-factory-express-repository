@@ -11,4 +11,21 @@ export class ProductCartDao {
 
     return rows;
   }
+
+  public async getProductCartList(userId: number) {
+    const [rows, _] = await dataSource.query(
+      `SELECT 
+        id, 
+        user_id AS userId, 
+        product_id AS productId, 
+        quantity, 
+        created_at AS createdAt, 
+        updated_at AS updatedAt
+      FROM PRODUCT_CART 
+      WHERE user_id = ?
+      ORDER BY created_at DESC`,
+      [Number(userId)]
+    );
+    return rows;
+  }
 }

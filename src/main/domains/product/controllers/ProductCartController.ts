@@ -37,12 +37,40 @@ export class ProductCartController {
       productId,
       quantity,
     };
-    const productCartId = productCartService.postProductCart(reqDto);
+    const productCartId = await productCartService.postProductCart(reqDto);
 
     return res
       .status(statusCode.CREATED)
       .send(
         result.success(message.POST_PRODUCT_CART_SUCCESS, { productCartId })
+      );
+  }
+
+  /**
+   * 제품 장바구니 목록 조회 : [GET] http://localhost:8080/cart/product
+   *
+   * @version 1.0.0
+   * @since 1.0.0
+   * @author Kevin Ahn
+   *
+   * @param {Request} req (*authorization)
+   * @param {Response} res
+   * @return {*}
+   * @memberof ProductCartController
+   */
+  public async getProductCartList(req: Request, res: Response) {
+    const userId = req.userId;
+    if (!userId) {
+      throw new ProductCartRegisterFailedException(
+        message.PRODUCT_CART_INFO_REQUEST_ERROR
+      );
+    }
+    const productCartList = await productCartService.getProductCartList(userId);
+
+    return res
+      .status(statusCode.OK)
+      .send(
+        result.success(message.GET_PRODUCT_CART_LIST_SUCCESS, productCartList)
       );
   }
 }

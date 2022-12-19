@@ -13,5 +13,11 @@ productCartRouter.post(
   verifyAccessToken,
   asyncWrapper(productCartController.postProductCart)
 );
+productCartRouter.get(
+  '/product',
+  setHeaderInfoInReq,
+  verifyAccessToken,
+  asyncWrapper(productCartController.getProductCartList)
+);
 
 export default productCartRouter;
