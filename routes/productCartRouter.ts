@@ -19,5 +19,11 @@ productCartRouter.get(
   verifyAccessToken,
   asyncWrapper(productCartController.getProductCartList)
 );
+productCartRouter.patch(
+  '/product/:productId',
+  setHeaderInfoInReq,
+  verifyAccessToken,
+  asyncWrapper(productCartController.patchProductCart)
+);
 
 export default productCartRouter;
