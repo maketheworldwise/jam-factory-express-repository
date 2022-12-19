@@ -16,4 +16,14 @@ export class ProductService {
       throw new ProductFetchFailedException(message.GET_PRODUCT_LIST_FAILED);
     }
   }
+
+  public async getProduct(productId: number) {
+    try {
+      const rows: any = await productDao.getProduct(productId);
+
+      return rows[0];
+    } catch (err) {
+      throw new ProductFetchFailedException(message.GET_PRODUCT_FAILED);
+    }
+  }
 }
