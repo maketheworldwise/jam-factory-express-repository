@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import ProductCartDeleteFailedException from '../../../exceptions/product/ProductCartDeleteFailedException';
 import ProductCartFetchFailedException from '../../../exceptions/product/ProductCartFetchFailedException';
 import ProductCartRegisterFailedException from '../../../exceptions/product/ProductCartRegisterFailedException';
 import ProductCartUpdateFailedException from '../../../exceptions/product/ProductCartUpdateFailedException';
@@ -111,5 +112,33 @@ export class ProductCartController {
     return res
       .status(statusCode.OK)
       .send(result.success(message.PATCH_PRODUCT_CART_SUCCESS, reqDto));
+  }
+
+  /**
+   * 제품 장바구니 삭제 : [DELETE] http://localhost:8080/cart/:productCartId
+   *
+   * @version 1.0.0
+   * @since 1.0.0
+   * @author Kevin Ahn
+   *
+   * @param {Request} req (*authorization, *productCartId)
+   * @param {Response} res
+   * @return {*}
+   * @memberof ProductCartController
+   */
+  public async deleteProductCart(req: Request, res: Response) {
+    const userId = req.userId;
+    const productCartId = req.params.productCartId;
+    if (!userId || !productCartId) {
+      throw new ProductCartDeleteFailedException(
+        message.PRODUCT_CART_INFO_REQUEST_ERROR
+      );
+    }
+
+    await productCartService.deleteProductCart(Number(productCartId));
+
+    return res
+      .status(statusCode.NO_CONTENT)
+      .send(result.success(message.DELETE_PRODUCT_CART_SUCCESS));
   }
 }

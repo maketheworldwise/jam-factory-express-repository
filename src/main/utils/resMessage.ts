@@ -48,6 +48,9 @@ const message = {
 
   PATCH_PRODUCT_CART_SUCCESS: '장바구니 수정을 성공했습니다.',
   PATCH_PRODUCT_CART_FAILED: '장바구니 수정을 실패했습니다.',
+
+  DELETE_PRODUCT_CART_SUCCESS: '장바구니 삭제를 성공했습니다.',
+  DELETE_PRODUCT_CART_FAILED: '장바구니 삭제를 실패했습니다.',
 };
 
 export default message;

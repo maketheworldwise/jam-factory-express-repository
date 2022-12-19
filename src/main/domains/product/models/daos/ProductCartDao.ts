@@ -37,4 +37,10 @@ export class ProductCartDao {
       [quantity, userId, productId]
     );
   }
+
+  public async deleteProductCart(productCartId: number) {
+    await dataSource.query(`DELETE FROM PRODUCT_CART WHERE id = ?`, [
+      productCartId,
+    ]);
+  }
 }
