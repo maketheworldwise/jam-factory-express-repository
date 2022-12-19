@@ -13,6 +13,7 @@ const createApp = () => {
   app.use(morgan('combined'));
   app.use(cookieParser());
   app.use(logger);
+  app.use('/data', express.static('data'));
 
   return app;
 };

@@ -1,0 +1,51 @@
+name, price, delivery_fee, image_url
+[복음자리] 사과잼 370g, 5980, 3000, http://localhost:8080/data/images/jam_1.jpeg
+[복음자리] 사과잼 220g, 3570, 3000, http://localhost:8080/data/images/jam_2.jpeg
+[복음자리] 딸기잼 500g, 7190, 3000, http://localhost:8080/data/images/jam_3.jpeg
+[복음자리] 유기농 블루베리잼 340g, 9900, 3000, http://localhost:8080/data/images/jam_4.jpeg
+[복음자리] 무농약 무화과잼 350g, 5900, 3000, http://localhost:8080/data/images/jam_5.jpeg
+[복음자리] 무농약 딸기잼 500g, 9900, 3000, http://localhost:8080/data/images/jam_6.jpeg
+[복음자리] 무농약 딸기잼 360g, 5400, 3000, http://localhost:8080/data/images/jam_7.jpeg
+[복음자리] 포도잼 620g, 8100, 3000, http://localhost:8080/data/images/jam_8.jpeg
+[복음자리] 사과잼 620g, 7900, 3000, http://localhost:8080/data/images/jam_9.jpeg
+[복음자리] 사과잼 480g, 6980, 3000, http://localhost:8080/data/images/jam_10.jpeg
+[복음자리] 5가지베리잼 350g, 6290, 3000, http://localhost:8080/data/images/jam_11.jpeg
+[복음자리] 딸기잼 380g, 6290, 3000, http://localhost:8080/data/images/jam_12.jpeg
+[복음자리] 포도잼 370g, 6290, 3000, http://localhost:8080/data/images/jam_13.jpeg
+[복음자리][Fresh] 45도과일잼(딸기) 350g, 5980, 3000, http://localhost:8080/data/images/jam_14.jpeg
+[복음자리][Fresh] 45도과일잼(블루베리) 350g, 7580, 3000, http://localhost:8080/data/images/jam_15.jpeg
+[복음자리] 바로 짜먹는 딸기잼 100g, 2480, 3000, http://localhost:8080/data/images/jam_16.jpeg
+[복음자리] 바로 짜먹는 블루베리잼 100g, 2790, 3000, http://localhost:8080/data/images/jam_17.jpeg
+[복음자리] 바로 짜먹는 망고잼 100g, 2480, 3000, http://localhost:8080/data/images/jam_18.jpeg
+[복음자리] 바로 짜먹는 사과버터잼 100g, 2480, 3000, http://localhost:8080/data/images/jam_19.jpeg
+[복음자리][Fresh] 45도과일잼(딸기) 350g, 5980, 3000, http://localhost:8080/data/images/jam_20.jpeg
+[복음자리] 유자차 1030g, 10900, 3000, http://localhost:8080/data/images/tea_1.jpeg
+[복음자리] 유자차스틱(15입), 7900, 3000, http://localhost:8080/data/images/tea_2.jpeg
+[복음자리] 생강차스틱(15입), 7900, 3000, http://localhost:8080/data/images/tea_3.jpeg
+[복음자리] 홍삼&모과차 470g, 7800, 3000, http://localhost:8080/data/images/tea_4.jpeg
+[복음자리] 쌍화유자차 480g, 7800, 3000, http://localhost:8080/data/images/tea_5.jpeg
+[복음자리] 쌍화유자차 1050g, 13500, 3000, http://localhost:8080/data/images/tea_6.jpeg
+[복음자리] 쌍화유자차 620g, 8800, 3000, http://localhost:8080/data/images/tea_7.jpeg
+[복음자리] 배를넣어 부드러운 유자차 230g, 3100, 3000, http://localhost:8080/data/images/tea_8.jpeg
+[복음자리] 배를넣어 부드러운 유자차 480g, 6000, 3000, http://localhost:8080/data/images/tea_9.jpeg
+[복음자리] 배를넣어 부드러운 유자차 620g, 6870, 3000, http://localhost:8080/data/images/tea_10.jpeg
+[복음자리] 배도라지차 220g, 3500, 3000, http://localhost:8080/data/images/tea_11.jpeg
+[복음자리] 배도라지차 470g, 7700, 3000, http://localhost:8080/data/images/tea_12.jpeg
+[복음자리] 생강차 470g, 8500, 3000, http://localhost:8080/data/images/tea_13.jpeg
+[복음자리] 생강차 600g, 9700, 3000, http://localhost:8080/data/images/tea_14.jpeg
+[복음자리] 대추차 460g, 9600, 3000, http://localhost:8080/data/images/tea_15.jpeg
+[복음자리] 모과차 480g, 5980, 3000, http://localhost:8080/data/images/tea_16.jpeg
+[복음자리] 모과차 620g, 8800, 3000, http://localhost:8080/data/images/tea_17.jpeg
+[복음자리] 생강레차 500g, 5980, 3000, http://localhost:8080/data/images/tea_18.jpeg
+[복음자리] 콜드브루추출액 500ml케냐(냉장), 9900, 3000, http://localhost:8080/data/images/tea_19.jpeg
+[복음자리] 콜드브루추출액 500ml예가체프(냉장), 9900, 3000, http://localhost:8080/data/images/tea_20.jpeg
+진심의 애플망고, 20000, 3000, http://localhost:8080/data/images/tea_21.jpeg
+진심의 딸기, 18000, 3000, http://localhost:8080/data/images/tea_22.jpeg
+진심의 블루베리, 20000, 3000, http://localhost:8080/data/images/tea_23.jpeg
+진심의 허니자몽, 20000, 3000, http://localhost:8080/data/images/tea_24.jpeg
+[복음자리] 햄치즈샌드 560g(8입), 15900, 3000, http://localhost:8080/data/images/snack_1.jpeg
+[복음자리] 딸기샌드 520g(8입), 15900, 3000, http://localhost:8080/data/images/snack_2.jpeg
+[복음자리] 햄치즈샌드 560g(8입), 15900, 3000, http://localhost:8080/data/images/snack_1.jpeg
+[복음자리] 딸기샌드 520g(8입), 15900, 3000, http://localhost:8080/data/images/snack_2.jpeg
+오징어입 버터구이 500g(냉동), 13900, 3000, http://localhost:8080/data/images/snack_3.jpeg
+오도독 후라이드 500g(냉동), 11900, 3000, http://localhost:8080/data/images/snack_4.jpeg

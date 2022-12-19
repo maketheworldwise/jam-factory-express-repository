@@ -30,6 +30,10 @@ const message = {
   SIGN_IN_AGAIN: '다시 로그인해주세요.',
   SIGN_OUT_SUCCESS: '로그아웃을 성공했습니다.',
   SIGN_OUT_FAILED: '로그아웃을 실패했습니다.',
+
+  // 제품 메시지
+  GET_PRODUCT_LIST_SUCCESS: '제품 목록 조회에 성공했습니다.',
+  GET_PRODUCT_LIST_FAILED: '제품 목록 조회에 실패했습니다.',
 };
 
 export default message;
