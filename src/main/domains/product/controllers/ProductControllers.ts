@@ -14,7 +14,7 @@ export class ProductController {
    * @since 1.0.0
    * @author Kevin Ahn
    *
-   * @param {Request} req
+   * @param {Request} req (page, size)
    * @param {Response} res
    * @return {*}
    * @memberof ProductController
@@ -26,5 +26,26 @@ export class ProductController {
     return res
       .status(statusCode.OK)
       .send(result.success(message.GET_PRODUCT_LIST_SUCCESS, productList));
+  }
+
+  /**
+   * 제품 상세 조회 : [GET] http://localhost:8080/product/:productId
+   *
+   * @version 1.0.0
+   * @since 1.0.0
+   * @author Kevin Ahn
+   *
+   * @param {Request} req (*productId)
+   * @param {Response} res
+   * @return {*}
+   * @memberof ProductController
+   */
+  public async getProduct(req: Request, res: Response) {
+    const productId = req.params.productId;
+    const product = await productService.getProduct(Number(productId));
+
+    return res
+      .status(statusCode.OK)
+      .send(result.success(message.GET_PRODUCT_SUCCESS, product));
   }
 }
