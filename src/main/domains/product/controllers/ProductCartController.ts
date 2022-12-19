@@ -1,8 +1,11 @@
 import { Request, Response } from 'express';
+import ProductCartFetchFailedException from '../../../exceptions/product/ProductCartFetchFailedException';
 import ProductCartRegisterFailedException from '../../../exceptions/product/ProductCartRegisterFailedException';
+import ProductCartUpdateFailedException from '../../../exceptions/product/ProductCartUpdateFailedException';
 import message from '../../../utils/resMessage';
 import result from '../../../utils/resObject';
 import statusCode from '../../../utils/resStatusCode';
+import { PatchProductCartReqDto } from '../models/dtos/PatchProductCartReqDto';
 import { PostProductCartReqDto } from '../models/dtos/PostProductCartReqDto';
 import { ProductCartService } from '../services/ProductCartService';
 
@@ -33,9 +36,9 @@ export class ProductCartController {
     }
 
     const reqDto: PostProductCartReqDto = {
-      userId,
-      productId,
-      quantity,
+      userId: Number(userId),
+      productId: Number(productId),
+      quantity: Number(quantity),
     };
     const productCartId = await productCartService.postProductCart(reqDto);
 
@@ -61,7 +64,7 @@ export class ProductCartController {
   public async getProductCartList(req: Request, res: Response) {
     const userId = req.userId;
     if (!userId) {
-      throw new ProductCartRegisterFailedException(
+      throw new ProductCartFetchFailedException(
         message.PRODUCT_CART_INFO_REQUEST_ERROR
       );
     }
@@ -72,5 +75,41 @@ export class ProductCartController {
       .send(
         result.success(message.GET_PRODUCT_CART_LIST_SUCCESS, productCartList)
       );
+  }
+
+  /**
+   * 제품 장바구니 수정 : [PATCH] http://localhost:8080/cart/product/:productId
+   *
+   * @version 1.0.0
+   * @since 1.0.0
+   * @author Kevin Ahn
+   *
+   * @param {Request} req (*authorization, *productId, *quantity)
+   * @param {Response} res
+   * @return {*}
+   * @memberof ProductCartController
+   */
+  public async patchProductCart(req: Request, res: Response) {
+    const userId = req.userId;
+    const productId = req.params.productId;
+    const quantity = req.body.quantity;
+
+    // TODO: quantity가 0일 경우 삭제
+    if (!userId || !productId || !quantity) {
+      throw new ProductCartUpdateFailedException(
+        message.PRODUCT_CART_INFO_REQUEST_ERROR
+      );
+    }
+
+    const reqDto: PatchProductCartReqDto = {
+      userId: Number(userId),
+      productId: Number(productId),
+      quantity: Number(quantity),
+    };
+    await productCartService.patchProductCart(reqDto);
+
+    return res
+      .status(statusCode.OK)
+      .send(result.success(message.PATCH_PRODUCT_CART_SUCCESS, reqDto));
   }
 }
