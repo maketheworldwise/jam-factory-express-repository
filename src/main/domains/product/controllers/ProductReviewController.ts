@@ -43,4 +43,32 @@ export class ProductReviewController {
         result.success(message.POST_PRODUCT_REVIEW_SUCCESS, { productReviewId })
       );
   }
+
+  /**
+   * 제품 후기 목록 조회 : [GET] http://localhost:8080/review/product/:productId
+   *
+   * @version 1.0.0
+   * @since 1.0.0
+   * @author Kevin Ahn
+   *
+   * @param {Request} req (*productId)
+   * @param {Response} res
+   * @return {*}
+   * @memberof ProductReviewController
+   */
+  public async getProductReviewList(req: Request, res: Response) {
+    const productId = req.params.productId;
+    const productReviewList = await productReviewService.getProductReviewList(
+      Number(productId)
+    );
+
+    return res
+      .status(statusCode.OK)
+      .send(
+        result.success(
+          message.GET_PRODUCT_REVIEW_LIST_SUCCESS,
+          productReviewList
+        )
+      );
+  }
 }
