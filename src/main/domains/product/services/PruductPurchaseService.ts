@@ -10,9 +10,12 @@ export class ProductPurchaseService {
     userId: number,
     productList: PostProductPurchaseReqDto[]
   ) {
+    // 동일한 제품을 구매할 경우가 있기 때문에
+    // 제품을 구매했는지 여부에 대한 처리는 생략
+
     try {
       await productPurchaseDao.postProductPurchase(userId, productList);
-    } catch (err) {
+    } catch (err: any) {
       throw new ProductPurchaseFailedException(
         message.POST_PRODUCT_PURCHASE_FAILED
       );

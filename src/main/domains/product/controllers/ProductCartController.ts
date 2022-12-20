@@ -14,10 +14,11 @@ const productCartService = new ProductCartService();
 
 export class ProductCartController {
   /**
-   * 제품 장바구니 등록 : [POST] http://localhost:8080/cart/product/:productId
+   * 제품 장바구니 등록
+   * [POST] http://localhost:8080/cart/product/:productId
    *
-   * @version 1.0.0
-   * @since 1.0.0
+   * @version 0.0.0
+   * @since 0.0.0
    * @author Kevin Ahn
    *
    * @param {Request} req (*authorization, *productId, quantity)
@@ -26,9 +27,11 @@ export class ProductCartController {
    * @memberof ProductCartController
    */
   public async postProductCart(req: Request, res: Response) {
-    const userId = req.userId;
-    const productId = req.params.productId;
-    const quantity = req.body.quantity;
+    // TODO: 장바구니에 중복된 제품을 등록할 경우에 대한 로직 구현 필요
+
+    const userId: number = req.userId;
+    const productId: number = Number(req.params.productId);
+    const quantity: number = req.body.quantity;
 
     if (!productId || !userId) {
       throw new ProductCartRegisterFailedException(
@@ -37,11 +40,14 @@ export class ProductCartController {
     }
 
     const reqDto: PostProductCartReqDto = {
-      userId: Number(userId),
-      productId: Number(productId),
-      quantity: Number(quantity),
+      userId,
+      productId,
+      quantity,
     };
-    const productCartId = await productCartService.postProductCart(reqDto);
+
+    const productCartId: number = await productCartService.postProductCart(
+      reqDto
+    );
 
     return res
       .status(statusCode.CREATED)
@@ -51,10 +57,11 @@ export class ProductCartController {
   }
 
   /**
-   * 제품 장바구니 목록 조회 : [GET] http://localhost:8080/cart/product
+   * 제품 장바구니 목록 조회
+   * [GET] http://localhost:8080/cart/product
    *
-   * @version 1.0.0
-   * @since 1.0.0
+   * @version 0.0.0
+   * @since 0.0.0
    * @author Kevin Ahn
    *
    * @param {Request} req (*authorization)
@@ -63,13 +70,16 @@ export class ProductCartController {
    * @memberof ProductCartController
    */
   public async getProductCartList(req: Request, res: Response) {
-    const userId = req.userId;
+    const userId: number = req.userId;
+
     if (!userId) {
       throw new ProductCartFetchFailedException(
         message.PRODUCT_CART_INFO_REQUEST_ERROR
       );
     }
-    const productCartList = await productCartService.getProductCartList(userId);
+
+    const productCartList: object[] =
+      await productCartService.getProductCartList(userId);
 
     return res
       .status(statusCode.OK)
@@ -79,10 +89,11 @@ export class ProductCartController {
   }
 
   /**
-   * 제품 장바구니 수정 : [PATCH] http://localhost:8080/cart/product/:productId
+   * 제품 장바구니 수정
+   * [PATCH] http://localhost:8080/cart/product/:productId
    *
-   * @version 1.0.0
-   * @since 1.0.0
+   * @version 0.0.0
+   * @since 0.0.0
    * @author Kevin Ahn
    *
    * @param {Request} req (*authorization, *productId, *quantity)
@@ -91,11 +102,12 @@ export class ProductCartController {
    * @memberof ProductCartController
    */
   public async patchProductCart(req: Request, res: Response) {
-    const userId = req.userId;
-    const productId = req.params.productId;
-    const quantity = req.body.quantity;
+    // TODO: 수량이 0일 경우에 대한 로직 구현 필요
 
-    // TODO: quantity가 0일 경우 삭제
+    const userId: number = req.userId;
+    const productId: number = Number(req.params.productId);
+    const quantity: number = req.body.quantity;
+
     if (!userId || !productId || !quantity) {
       throw new ProductCartUpdateFailedException(
         message.PRODUCT_CART_INFO_REQUEST_ERROR
@@ -103,10 +115,11 @@ export class ProductCartController {
     }
 
     const reqDto: PatchProductCartReqDto = {
-      userId: Number(userId),
-      productId: Number(productId),
-      quantity: Number(quantity),
+      userId,
+      productId,
+      quantity,
     };
+
     await productCartService.patchProductCart(reqDto);
 
     return res
@@ -115,10 +128,11 @@ export class ProductCartController {
   }
 
   /**
-   * 제품 장바구니 삭제 : [DELETE] http://localhost:8080/cart/:productCartId
+   * 제품 장바구니 삭제
+   * [DELETE] http://localhost:8080/cart/:productCartId
    *
-   * @version 1.0.0
-   * @since 1.0.0
+   * @version 0.0.0
+   * @since 0.0.0
    * @author Kevin Ahn
    *
    * @param {Request} req (*authorization, *productCartId)
@@ -127,15 +141,16 @@ export class ProductCartController {
    * @memberof ProductCartController
    */
   public async deleteProductCart(req: Request, res: Response) {
-    const userId = req.userId;
-    const productCartId = req.params.productCartId;
+    const userId: number = req.userId;
+    const productCartId: number = Number(req.params.productCartId);
+
     if (!userId || !productCartId) {
       throw new ProductCartDeleteFailedException(
         message.PRODUCT_CART_INFO_REQUEST_ERROR
       );
     }
 
-    await productCartService.deleteProductCart(Number(productCartId));
+    await productCartService.deleteProductCart(productCartId);
 
     return res
       .status(statusCode.NO_CONTENT)

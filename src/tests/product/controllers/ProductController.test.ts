@@ -11,10 +11,6 @@ describe('ProductController Test', () => {
   });
 
   afterAll(async () => {
-    await dataSource.query(`
-      SET FOREIGN_KEY_CHECKS = 0;
-      SET FOREIGN_KEY_CHECKS = 1;
-    `);
     await dataSource.end();
   });
 

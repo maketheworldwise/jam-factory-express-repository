@@ -1,23 +1,35 @@
 import dataSource from '../../../../../../configs/db.config';
-import { SignInReqDto } from '../dtos/SignInReqDto';
 import { TokensDto } from '../dtos/TokensDto';
 import { SignUpReqDto } from '../dtos/SignUpReqDto';
 
 export class SignDao {
   public async signUp(reqDto: SignUpReqDto) {
+    const {
+      nickname,
+      password,
+      zipCode,
+      addressMain,
+      addressSub,
+      phone,
+      email,
+      birth,
+    } = reqDto;
+
     const [rows, _] = await dataSource.query(
-      `INSERT INTO USER(nickname, password, zip_code, address_main, address_sub, phone, email, birth) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
+      `INSERT INTO USER(nickname, password, zip_code, address_main, address_sub, phone, email, birth) 
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
       [
-        reqDto.nickname,
-        reqDto.password,
-        reqDto.zipCode,
-        reqDto.addressMain,
-        reqDto.addressSub,
-        reqDto.phone,
-        reqDto.email,
-        reqDto.birth,
+        nickname,
+        password,
+        zipCode,
+        addressMain,
+        addressSub,
+        phone,
+        email,
+        birth,
       ]
     );
+
     return rows;
   }
 
@@ -26,6 +38,7 @@ export class SignDao {
       `SELECT id, password FROM USER WHERE nickname = ?`,
       [nickname]
     );
+
     return rows;
   }
 
@@ -40,8 +53,14 @@ export class SignDao {
     tokens: TokensDto
   ) {
     await dataSource.query(
-      `INSERT INTO TOKEN(user_id, ip, device, access_token, refresh_token) VALUES (?, ?, ?, ?, ?)
-      ON DUPLICATE KEY UPDATE user_id = ?, ip = ?, device = ?, access_token = ?, refresh_token = ?`,
+      `INSERT INTO TOKEN(user_id, ip, device, access_token, refresh_token) 
+        VALUES (?, ?, ?, ?, ?)
+      ON DUPLICATE KEY UPDATE 
+        user_id = ?, 
+        ip = ?, 
+        device = ?, 
+        access_token = ?, 
+        refresh_token = ?`,
       [
         userId,
         ip,
@@ -59,17 +78,21 @@ export class SignDao {
 
   public async verifyNickname(nickname: string) {
     const [rows, _] = await dataSource.query(
-      `SELECT EXISTS(SELECT id FROM USER WHERE nickname = ?) AS isNotValidNickname`,
+      `SELECT EXISTS(
+        SELECT id FROM USER WHERE nickname = ?) AS isNotValidNickname`,
       [nickname]
     );
+
     return rows;
   }
 
   public async verifyTokenUser(userId: number) {
     const [rows, _] = await dataSource.query(
-      `SELECT EXISTS(SELECT nickname FROM USER WHERE id = ?) AS isValidUser`,
+      `SELECT EXISTS(
+        SELECT nickname FROM USER WHERE id = ?) AS isValidUser`,
       [userId]
     );
+
     return rows;
   }
 
@@ -79,9 +102,13 @@ export class SignDao {
     refreshToken: string
   ) {
     const [rows, _] = await dataSource.query(
-      `SELECT EXISTS(SELECT user_id FROM TOKEN WHERE user_id = ? AND access_token = ? AND refresh_token = ?) AS isValidHost`,
+      `SELECT EXISTS(
+        SELECT user_id 
+        FROM TOKEN 
+        WHERE user_id = ? AND access_token = ? AND refresh_token = ?) AS isValidHost`,
       [userId, accessToken, refreshToken]
     );
+
     return rows;
   }
 }

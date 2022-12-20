@@ -18,9 +18,9 @@ export class ProductReviewService {
         productId,
         reqDto
       );
-      // TODO: 내가 구매했는지 안했는지에 대한 로직 필요
+
       return rows.insertId;
-    } catch (err) {
+    } catch (err: any) {
       throw new ProductReviewRegisterFailedException(
         message.POST_PRODUCT_REVIEW_FAILED
       );
@@ -32,7 +32,7 @@ export class ProductReviewService {
       const rows = await productReviewDao.getProductReview(productId);
 
       return rows;
-    } catch (err) {
+    } catch (err: any) {
       throw new ProductReviewFetchFailedException(
         message.GET_PRODUCT_CART_LIST_FAILED
       );

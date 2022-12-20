@@ -13,15 +13,16 @@ export class ProductCartService {
   public async postProductCart(reqDto: PostProductCartReqDto) {
     try {
       const rows: any = await productCartDao.postProductCart(reqDto);
-      const userId = rows.insertId;
+      const userId: number = rows.insertId;
 
       if (!userId) {
         throw new ProductCartRegisterFailedException(
           message.POST_PRODUCT_CART_FAILED
         );
       }
+
       return userId;
-    } catch (err) {
+    } catch (err: any) {
       throw new ProductCartRegisterFailedException(
         message.POST_PRODUCT_CART_FAILED
       );
@@ -33,7 +34,7 @@ export class ProductCartService {
       const rows: any = await productCartDao.getProductCartList(userId);
 
       return rows;
-    } catch (err) {
+    } catch (err: any) {
       throw new ProductCartFetchFailedException(
         message.GET_PRODUCT_CART_LIST_FAILED
       );
@@ -43,7 +44,7 @@ export class ProductCartService {
   public async patchProductCart(reqDto: PatchProductCartReqDto) {
     try {
       await productCartDao.patchProductCart(reqDto);
-    } catch (err) {
+    } catch (err: any) {
       throw new ProductCartUpdateFailedException(
         message.PATCH_PRODUCT_CART_FAILED
       );
@@ -53,7 +54,7 @@ export class ProductCartService {
   public async deleteProductCart(productCartId: number) {
     try {
       await productCartDao.deleteProductCart(productCartId);
-    } catch (err) {
+    } catch (err: any) {
       throw new ProductCartDeleteFailedException(
         message.DELETE_PRODUCT_CART_FAILED
       );

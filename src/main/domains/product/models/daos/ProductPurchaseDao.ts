@@ -15,8 +15,9 @@ export class ProductPurchaseDao {
       }
     });
 
-    const [rows, _] = await dataSource.query(
-      `INSERT INTO PRODUCT_PURCHASE(user_id, product_id, quantity) VALUES ${values}`
+    await dataSource.query(
+      `INSERT INTO PRODUCT_PURCHASE(user_id, product_id, quantity) 
+        VALUES ${values}`
     );
   }
 }

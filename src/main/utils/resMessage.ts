@@ -40,8 +40,8 @@ const message = {
 
   PRODUCT_CART_INFO_REQUEST_ERROR:
     '장바구니 요청에 필요한 정보가 올바르지 않습니다.',
-  POST_PRODUCT_CART_SUCCESS: '장바구니 등록을 성공했습니다.',
-  POST_PRODUCT_CART_FAILED: '장바구니 등록을 실패했습니다.',
+  POST_PRODUCT_CART_SUCCESS: '장바구니에 등록을 성공했습니다.',
+  POST_PRODUCT_CART_FAILED: '장바구니에 등록을 실패했습니다.',
 
   GET_PRODUCT_CART_LIST_SUCCESS: '장바구니 목록 조회에 성공했습니다.',
   GET_PRODUCT_CART_LIST_FAILED: '장바구니 목록 조회에 실패했습니다.',
