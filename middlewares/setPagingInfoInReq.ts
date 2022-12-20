@@ -9,8 +9,8 @@ const setPagingInfoInReq = async (
   next: NextFunction
 ) => {
   try {
-    const page = req.query.page ? req.query.page : 0;
-    const size = req.query.size ? req.query.size : 12;
+    const page: number = req.query.page ? Number(req.query.page) : 0;
+    const size: number = req.query.size ? Number(req.query.size) : 12;
 
     const pagingInfo: PagingInfoReqDto = {
       page,
@@ -18,6 +18,7 @@ const setPagingInfoInReq = async (
     };
 
     req.pagingInfo = pagingInfo;
+
     next();
   } catch (err: any) {
     return res

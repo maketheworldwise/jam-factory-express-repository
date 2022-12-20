@@ -1,4 +1,4 @@
 export interface PostProductPurchaseReqDto {
-  productId: any;
-  quantity: any;
+  productId: number;
+  quantity: number;
 }

@@ -8,10 +8,11 @@ const productService = new ProductService();
 
 export class ProductController {
   /**
-   * 제품 목록 조회 : [GET] http://localhost:8080/product
+   * 제품 목록 조회
+   * [GET] http://localhost:8080/product
    *
-   * @version 1.0.0
-   * @since 1.0.0
+   * @version 0.0.0
+   * @since 0.0.0
    * @author Kevin Ahn
    *
    * @param {Request} req (page, size)
@@ -20,8 +21,10 @@ export class ProductController {
    * @memberof ProductController
    */
   public async getProductList(req: Request, res: Response) {
-    // TODO: 필터링 (기준 미정)
-    const productList = await productService.getProductList(req.pagingInfo);
+    // TODO: 필터링 및 정렬 기능 구현 필요
+    const productList: object[] = await productService.getProductList(
+      req.pagingInfo
+    );
 
     return res
       .status(statusCode.OK)
@@ -29,10 +32,11 @@ export class ProductController {
   }
 
   /**
-   * 제품 상세 조회 : [GET] http://localhost:8080/product/:productId
+   * 제품 상세 조회
+   * [GET] http://localhost:8080/product/:productId
    *
-   * @version 1.0.0
-   * @since 1.0.0
+   * @version 0.0.0
+   * @since 0.0.0
    * @author Kevin Ahn
    *
    * @param {Request} req (*productId)

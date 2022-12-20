@@ -1,4 +1,4 @@
 export interface PostProductReviewReqDto {
-  rating: any;
-  content: any;
+  rating: string;
+  content: string;
 }

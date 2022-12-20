@@ -8,8 +8,10 @@ export class ProductReviewDao {
     reqDto: PostProductReviewReqDto
   ) {
     const { rating, content } = reqDto;
+
     const [rows, _] = await dataSource.query(
-      `INSERT PRODUCT_REVIEW(user_id, product_id, rating, content) VALUES (?, ?, ?, ?)`,
+      `INSERT PRODUCT_REVIEW(user_id, product_id, rating, content) 
+        VALUES (?, ?, ?, ?)`,
       [userId, productId, rating, content]
     );
 

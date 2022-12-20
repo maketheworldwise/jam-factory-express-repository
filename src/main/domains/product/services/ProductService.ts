@@ -12,17 +12,19 @@ export class ProductService {
       const rows: any = await productDao.getProductList(page, size);
 
       return rows;
-    } catch (err) {
+    } catch (err: any) {
       throw new ProductFetchFailedException(message.GET_PRODUCT_LIST_FAILED);
     }
   }
 
   public async getProduct(productId: number) {
     try {
+      // 제품 목록 화면에서 제품 상세 화면으로 넘어가기에
+      // 제품이 없을 경우에 대한 처리는 생략
       const rows: any = await productDao.getProduct(productId);
 
       return rows[0];
-    } catch (err) {
+    } catch (err: any) {
       throw new ProductFetchFailedException(message.GET_PRODUCT_FAILED);
     }
   }

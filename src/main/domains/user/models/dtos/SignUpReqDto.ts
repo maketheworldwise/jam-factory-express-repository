@@ -5,6 +5,6 @@ export interface SignUpReqDto {
   addressMain?: string;
   addressSub?: string;
   phone: string;
-  email?: string;
+  email: string;
   birth: Date;
 }

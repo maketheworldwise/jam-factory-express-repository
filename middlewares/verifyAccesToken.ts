@@ -13,10 +13,10 @@ const verifyAccessToken = async (
   next: NextFunction
 ) => {
   try {
-    const accessToken = req.headerInfo.accessToken;
+    const accessToken: string = req.headerInfo.accessToken;
     const jwtPayload: any = await decodeToken(ACCESS_TOKEN_TYPE, accessToken);
 
-    const userId = jwtPayload.userId;
+    const userId: number = jwtPayload.userId;
     await signService.verifyTokenUser(userId);
 
     req.userId = userId;

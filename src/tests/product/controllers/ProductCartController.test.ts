@@ -10,7 +10,7 @@ describe('ProductCartController Test', () => {
   beforeAll(async () => {
     app = createApp();
 
-    // 회원가입
+    // 회원가입 및 로그인
     await request(app).post('/sign-up').send({
       nickname: 'kevin',
       password: '12345',
@@ -19,7 +19,6 @@ describe('ProductCartController Test', () => {
       email: 'kevin@example.com',
     });
 
-    // 로그인
     await request(app)
       .post('/sign-in')
       .send({

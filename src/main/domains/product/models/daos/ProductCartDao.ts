@@ -5,8 +5,10 @@ import { PostProductCartReqDto } from '../dtos/PostProductCartReqDto';
 export class ProductCartDao {
   public async postProductCart(reqDto: PostProductCartReqDto) {
     const { userId, productId, quantity } = reqDto;
+
     const [rows, _] = await dataSource.query(
-      `INSERT INTO PRODUCT_CART(user_id, product_id, quantity) VALUES(?, ?, ?)`,
+      `INSERT INTO PRODUCT_CART(user_id, product_id, quantity) 
+        VALUES(?, ?, ?)`,
       [userId, productId, quantity]
     );
 
@@ -27,13 +29,16 @@ export class ProductCartDao {
       ORDER BY created_at DESC`,
       [userId]
     );
+
     return rows;
   }
 
   public async patchProductCart(reqDto: PatchProductCartReqDto) {
     const { userId, productId, quantity } = reqDto;
+
     await dataSource.query(
-      `UPDATE PRODUCT_CART SET quantity = ? WHERE user_id = ? AND product_id = ?`,
+      `UPDATE PRODUCT_CART SET quantity = ? 
+        WHERE user_id = ? AND product_id = ?`,
       [quantity, userId, productId]
     );
   }

@@ -1,4 +1,4 @@
 export interface PagingInfoReqDto {
-  page?: any;
-  size?: any;
+  page: number;
+  size: number;
 }
