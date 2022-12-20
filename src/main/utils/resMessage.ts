@@ -51,6 +51,11 @@ const message = {
 
   DELETE_PRODUCT_CART_SUCCESS: '장바구니 삭제를 성공했습니다.',
   DELETE_PRODUCT_CART_FAILED: '장바구니 삭제를 실패했습니다.',
+
+  PRODUCT_PURCHASE_INFO_REQUEST_ERROR:
+    '제품 구매에 필요한 정보가 올바르지 않습니다.',
+  POST_PRODUCT_PURCHASE_SUCCESS: '제품 구매를 성공했습니다.',
+  POST_PRODUCT_PURCHASE_FAILED: '제품 구매를 실패했습니다.',
 };
 
 export default message;
