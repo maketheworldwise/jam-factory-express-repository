@@ -25,7 +25,7 @@ CREATE TABLE `PRODUCT_REVIEW` (
   `id` bigint PRIMARY KEY AUTO_INCREMENT,
   `user_id` bigint,
   `product_id` bigint,
-  `rating` int,
+  `rating` varchar(5) DEFAULT '5.0',
   `content` text,
   `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP

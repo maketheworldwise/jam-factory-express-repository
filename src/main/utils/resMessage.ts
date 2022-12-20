@@ -56,6 +56,11 @@ const message = {
     '제품 구매에 필요한 정보가 올바르지 않습니다.',
   POST_PRODUCT_PURCHASE_SUCCESS: '제품 구매를 성공했습니다.',
   POST_PRODUCT_PURCHASE_FAILED: '제품 구매를 실패했습니다.',
+
+  PRODUCT_REVIEW_INFO_REQUEST_ERROR:
+    '제품 후기에 필요한 정보가 올바르지 않습니다.',
+  POST_PRODUCT_REVIEW_SUCCESS: '제품 후기 작성을 성공했습니다.',
+  POST_PRODUCT_REVIEW_FAILED: '제품 후기 작성을 실패했습니다.',
 };
 
 export default message;
