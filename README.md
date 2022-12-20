@@ -1,6 +1,6 @@
 <h1 align="center">Welcome to jam factory 👋</h1>
 <p>
-  <img alt="Version" src="https://img.shields.io/badge/version-1.0.0-blue.svg?cacheSeconds=2592000" />
+  <img alt="Version" src="https://img.shields.io/badge/version-0.0.0-blue.svg?cacheSeconds=2592000" />
   <a href="documentation url" target="_blank">
     <img alt="Documentation" src="https://img.shields.io/badge/documentation-yes-brightgreen.svg" />
   </a>
@@ -38,13 +38,13 @@ docker run -d -p 3306:3306 --name jam_factory jam_factory:latest
 **DB 설계 (dbmate)** :
 
 ```sh
-# 테스트용 DB
-dbmate create JAM_FACTORY_TEST
-dbmate --url "mysql://root:password@127.0.0.1:3306/JAM_FACTORY_TEST" up
-
 # 개발(QA) DB
 dbmate create JAM_FACTORY
 dbmate up
+
+# 테스트용 DB
+# JAM_FACTORY_TEST 데이터베이스가 만들어져있다 가정
+dbmate --url "mysql://root:password@127.0.0.1:3306/JAM_FACTORY_TEST" up
 ```
 
 ## Usage

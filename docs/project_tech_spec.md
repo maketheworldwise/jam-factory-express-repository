@@ -19,6 +19,10 @@
 
 ### Database
 
+- 간단하게 구현하는 프로젝트인 만큼 정규화를 약소하게 구성
+- 제품을 각 카테고리별로 불러올 때의 속도 저하 문제는 감안
+- 최소 테이블로 구성
+
 <details>
 <summary>2022.11.06</summary>
 <div markdown="1">
@@ -29,12 +33,22 @@
 </div>
 </details>
 
+<details>
+<summary>2022.11.06</summary>
+<div markdown="1">
+<br>
+
+![](/docs/images/db_20221220.png)
+
+</div>
+</details>
+
 ### Technical Notes
 
 **💡 Environments** :
 
-- 테스트용 DB
 - 개발(QA) DB
+- 테스트용 DB
 
 **💡 Requirements** :
 
@@ -52,12 +66,13 @@
     ```
 - 제품 목록 조회 (페이징, 필터링)
 - 제품 상세 조회
-- 제품 이용 후기 등록 (제목, 별점, 내용, 구매자 외에 작성 불가)
-- 제품 이용 후기 목록 조회 (페이징)
+- 제품 후기 등록 (제목, 별점, 내용, 구매자 외에 작성 불가)
+- 제품 후기 목록 조회 (페이징)
 - 제품 장바구니 등록
 - 제품 장바구니 조회
 - 제품 장바구니 수정 (수량)
 - 제품 장바구니 삭제
+- 제품 구매
 
 **📄 2022.11.06** :
 
@@ -116,6 +131,29 @@
 <br>
 
 - 회원가입 유효성 검사
+
+</div>
+</details>
+<br>
+
+**📄 2022.12.20** :
+
+<details>
+<summary>Discussion</summary>
+<div markdown="1">
+<br>
+
+- 제품 후기 작성 최대 별점
+
+</div>
+</details>
+
+<details>
+<summary>Decision</summary>
+<div markdown="1">
+<br>
+
+- 별점 최대 5.0 (기본)
 
 </div>
 </details>
