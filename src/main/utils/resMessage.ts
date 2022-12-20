@@ -61,6 +61,9 @@ const message = {
     '제품 후기에 필요한 정보가 올바르지 않습니다.',
   POST_PRODUCT_REVIEW_SUCCESS: '제품 후기 작성을 성공했습니다.',
   POST_PRODUCT_REVIEW_FAILED: '제품 후기 작성을 실패했습니다.',
+
+  GET_PRODUCT_REVIEW_LIST_SUCCESS: '제품 후기 목록 조회에 성공했습니다.',
+  GET_PRODUCT_REVIEW_LIST_FAILED: '제품 후기 목록 조회에 실패했습니다.',
 };
 
 export default message;
