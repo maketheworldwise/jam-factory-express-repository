@@ -13,5 +13,9 @@ productReviewRouter.post(
   verifyAccessToken,
   asyncWrapper(productReviewController.postProductReview)
 );
+productReviewRouter.get(
+  '/product/:productId',
+  asyncWrapper(productReviewController.getProductReviewList)
+);
 
 export default productReviewRouter;

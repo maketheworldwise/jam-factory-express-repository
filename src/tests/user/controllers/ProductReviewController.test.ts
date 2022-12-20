@@ -74,4 +74,8 @@ describe('ProductReviewController Test', () => {
       })
       .expect(statusCode.CREATED);
   });
+
+  test('제품 후기 목록 조회', async () => {
+    await request(app).get('/review/product/2').expect(statusCode.OK);
+  });
 });

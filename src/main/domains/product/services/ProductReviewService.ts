@@ -1,3 +1,4 @@
+import ProductReviewFetchFailedException from '../../../exceptions/product/ProductReviewFetchFailedException';
 import ProductReviewRegisterFailedException from '../../../exceptions/product/ProductReviewRegisterFailedException';
 import message from '../../../utils/resMessage';
 import { ProductReviewDao } from '../models/daos/ProductReviewDao';
@@ -22,6 +23,18 @@ export class ProductReviewService {
     } catch (err) {
       throw new ProductReviewRegisterFailedException(
         message.POST_PRODUCT_REVIEW_FAILED
+      );
+    }
+  }
+
+  public async getProductReviewList(productId: number) {
+    try {
+      const rows = await productReviewDao.getProductReview(productId);
+
+      return rows;
+    } catch (err) {
+      throw new ProductReviewFetchFailedException(
+        message.GET_PRODUCT_CART_LIST_FAILED
       );
     }
   }
