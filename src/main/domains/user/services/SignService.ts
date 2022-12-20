@@ -28,13 +28,14 @@ export class SignService {
       await this.verifyNickname(reqBodyDto.nickname);
 
       const rows: any = await signDao.signUp(reqBodyDto);
-      const userId = rows.insertId;
+      const userId: number = rows.insertId;
 
-      if (!userId) {
+      if (!userId || userId === 0) {
         throw new SignUpFailedException(message.SIGN_UP_FAILED);
       }
+
       return userId;
-    } catch (err) {
+    } catch (err: any) {
       throw new SignUpFailedException(message.SIGN_UP_FAILED);
     }
   }
@@ -43,19 +44,23 @@ export class SignService {
     reqHeaderDto: HeaderInfoReqDto,
     reqBodyDto: SignInReqDto
   ) {
-    try {
-      // 로그인 후 토큰 발급
-      const rows: any = await signDao.signIn(reqBodyDto.nickname);
-      const userId = rows[0].id;
-      const password = rows[0].password;
+    // 로그인 후 토큰 발급
+    let userId: number;
+    let password: string;
 
-      if (!userId || bcrypt.compareSync(reqBodyDto.password, password)) {
-        throw new SignInFailedException(message.USER_NOT_FOUND_ERROR);
-      }
-      return this.registerToken(userId, reqHeaderDto);
-    } catch (err) {
+    try {
+      const rows: any = await signDao.signIn(reqBodyDto.nickname);
+      userId = rows[0].id;
+      password = rows[0].password;
+    } catch (err: any) {
       throw new SignInFailedException(message.SIGN_IN_FAILED);
     }
+
+    if (!userId || bcrypt.compareSync(reqBodyDto.password, password)) {
+      throw new SignInFailedException(message.USER_NOT_FOUND_ERROR);
+    }
+
+    return this.registerToken(userId, reqHeaderDto);
   }
 
   public async signOut(reqHeaderDto: HeaderInfoReqDto) {
@@ -64,10 +69,10 @@ export class SignService {
         REFRESH_TOKEN_TYPE,
         reqHeaderDto.refreshToken
       );
-      const userId = jwtPayload.userId;
+      const userId: number = jwtPayload.userId;
 
       await signDao.signOut(userId);
-    } catch (err) {
+    } catch (err: any) {
       throw new SignOutFailedException(message.SIGN_OUT_FAILED);
     }
   }
@@ -80,14 +85,14 @@ export class SignService {
 
   public async registerToken(userId: number, reqHeaderDto: HeaderInfoReqDto) {
     // 토큰 생성 및 업데이트 (토큰 재발급)
-    const tokens = await this.createToken(userId);
+    const tokens: TokensDto = await this.createToken(userId);
     await this.updateToken(userId, reqHeaderDto, tokens);
     return tokens;
   }
 
   public async createToken(userId: number): Promise<TokensDto> {
-    const accessToken = createToken(ACCESS_TOKEN_TYPE, userId);
-    const refreshToken = createToken(REFRESH_TOKEN_TYPE, userId);
+    const accessToken: string = createToken(ACCESS_TOKEN_TYPE, userId);
+    const refreshToken: string = createToken(REFRESH_TOKEN_TYPE, userId);
 
     return {
       accessToken,
@@ -107,16 +112,16 @@ export class SignService {
         reqHeaderDto.device,
         tokens
       );
-    } catch (err) {
+    } catch (err: any) {
       throw new TokenUpdateFailedException(message.TOKEN_UPDATE_FAILED);
     }
   }
 
   public async verifyRefreshToken(refreshToken: any) {
+    // Refresh 토큰 만료시 재로그인
     try {
       return await decodeToken(REFRESH_TOKEN_TYPE, refreshToken);
-    } catch (err) {
-      // Refresh 토큰 만료시 재로그인
+    } catch (err: any) {
       throw new SignInTryAgainException(message.SIGN_IN_AGAIN);
     }
   }
@@ -127,7 +132,7 @@ export class SignService {
     try {
       const rows: any = await signDao.verifyNickname(nickname);
       isNotValidNickname = rows[0].isNotValidNickname;
-    } catch (err) {
+    } catch (err: any) {
       throw new UserFetchFailedException(message.USER_FETCH_FAILED);
     }
 
@@ -160,7 +165,7 @@ export class SignService {
         reqHeaderDto.accessToken,
         reqHeaderDto.refreshToken
       );
-      const isValidHost = rows[0].isValidHost;
+      const isValidHost: boolean = rows[0].isValidHost;
 
       if (!isValidHost) {
         throw new TokenHostMisMatchException(message.TOKEN_HOST_MISMATCH_ERROR);

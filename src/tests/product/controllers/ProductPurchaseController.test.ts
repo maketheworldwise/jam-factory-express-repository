@@ -3,14 +3,14 @@ import createApp from '../../../../app';
 import dataSource from '../../../../configs/db.config';
 import statusCode from '../../../main/utils/resStatusCode';
 
-describe('ProductReviewController Test', () => {
+describe('ProductPurchaseController Test', () => {
   let app: any;
   let accessToken: string;
 
   beforeAll(async () => {
     app = createApp();
 
-    // 회원가입
+    // 회원가입 및 로그인
     await request(app).post('/sign-up').send({
       nickname: 'kevin',
       password: '12345',
@@ -19,7 +19,6 @@ describe('ProductReviewController Test', () => {
       email: 'kevin@example.com',
     });
 
-    // 로그인
     await request(app)
       .post('/sign-in')
       .send({
@@ -29,8 +28,20 @@ describe('ProductReviewController Test', () => {
       .then(res => {
         accessToken = res.body.data.accessToken;
       });
+  });
 
-    // 제품 구매
+  afterAll(async () => {
+    await dataSource.query(`
+      SET FOREIGN_KEY_CHECKS = 0;
+      TRUNCATE USER;
+      TRUNCATE TOKEN;
+      TRUNCATE PRODUCT_PURCHASE;
+      SET FOREIGN_KEY_CHECKS = 1;
+    `);
+    await dataSource.end();
+  });
+
+  test('제품 구매', async () => {
     await request(app)
       .post('/purchase/product')
       .set('Authorization', 'Bearer ' + accessToken)
@@ -49,33 +60,7 @@ describe('ProductReviewController Test', () => {
             quantity: 9,
           },
         ],
-      });
-  });
-
-  afterAll(async () => {
-    await dataSource.query(`
-      SET FOREIGN_KEY_CHECKS = 0;
-      TRUNCATE USER;
-      TRUNCATE TOKEN;
-      TRUNCATE PRODUCT_PURCHASE;
-      TRUNCATE PRODUCT_REVIEW;
-      SET FOREIGN_KEY_CHECKS = 1;
-    `);
-    await dataSource.end();
-  });
-
-  test('제품 후기 등록', async () => {
-    await request(app)
-      .post('/review/product/2')
-      .set('Authorization', 'Bearer ' + accessToken)
-      .send({
-        rating: '5.0',
-        content: '너무 좋아요',
       })
       .expect(statusCode.CREATED);
-  });
-
-  test('제품 후기 목록 조회', async () => {
-    await request(app).get('/review/product/2').expect(statusCode.OK);
   });
 });

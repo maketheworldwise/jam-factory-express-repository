@@ -1,5 +1,5 @@
 export interface PatchProductCartReqDto {
-  userId: any;
-  productId: any;
-  quantity: any;
+  userId: number;
+  productId: number;
+  quantity: number;
 }

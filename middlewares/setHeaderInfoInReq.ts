@@ -14,13 +14,14 @@ const setHeaderInfoInReq = async (
     const ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
     const device = req.headers['user-agent'] || 'web';
     const accessToken = getAccessToken(req.headers.authorization) || '';
+
     if (accessToken === undefined) {
       return res
         .status(statusCode.BAD_REQUEST)
         .send(result.fail(message.TOKEN_NOT_EXIST_ERROR));
     }
 
-    const refreshToken =
+    const refreshToken: string =
       getRefreshToken(req.cookies) ||
       req.headers.cookie?.toString().split(';')[0].split('=')[1] ||
       '';

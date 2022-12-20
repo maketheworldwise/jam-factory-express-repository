@@ -3,14 +3,14 @@ import createApp from '../../../../app';
 import dataSource from '../../../../configs/db.config';
 import statusCode from '../../../main/utils/resStatusCode';
 
-describe('ProductPurchaseController Test', () => {
+describe('ProductReviewController Test', () => {
   let app: any;
   let accessToken: string;
 
   beforeAll(async () => {
     app = createApp();
 
-    // 회원가입
+    // 회원가입 및 로그인
     await request(app).post('/sign-up').send({
       nickname: 'kevin',
       password: '12345',
@@ -19,7 +19,6 @@ describe('ProductPurchaseController Test', () => {
       email: 'kevin@example.com',
     });
 
-    // 로그인
     await request(app)
       .post('/sign-in')
       .send({
@@ -29,6 +28,27 @@ describe('ProductPurchaseController Test', () => {
       .then(res => {
         accessToken = res.body.data.accessToken;
       });
+
+    // 제품 구매
+    await request(app)
+      .post('/purchase/product')
+      .set('Authorization', 'Bearer ' + accessToken)
+      .send({
+        productList: [
+          {
+            productId: 1,
+            quantity: 4,
+          },
+          {
+            productId: 2,
+            quantity: 5,
+          },
+          {
+            productId: 3,
+            quantity: 6,
+          },
+        ],
+      });
   });
 
   afterAll(async () => {
@@ -37,31 +57,24 @@ describe('ProductPurchaseController Test', () => {
       TRUNCATE USER;
       TRUNCATE TOKEN;
       TRUNCATE PRODUCT_PURCHASE;
+      TRUNCATE PRODUCT_REVIEW;
       SET FOREIGN_KEY_CHECKS = 1;
     `);
     await dataSource.end();
   });
 
-  test('제품 구매', async () => {
+  test('제품 후기 등록', async () => {
     await request(app)
-      .post('/purchase/product')
+      .post('/review/product/1')
       .set('Authorization', 'Bearer ' + accessToken)
       .send({
-        productList: [
-          {
-            productId: 2,
-            quantity: 3,
-          },
-          {
-            productId: 4,
-            quantity: 6,
-          },
-          {
-            productId: 6,
-            quantity: 9,
-          },
-        ],
+        rating: '5.0',
+        content: '너무 좋아요',
       })
       .expect(statusCode.CREATED);
+  });
+
+  test('제품 후기 목록 조회', async () => {
+    await request(app).get('/review/product/1').expect(statusCode.OK);
   });
 });
