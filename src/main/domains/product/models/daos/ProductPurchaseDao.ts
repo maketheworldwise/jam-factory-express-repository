@@ -1,0 +1,22 @@
+import dataSource from '../../../../../../configs/db.config';
+import { PostProductPurchaseReqDto } from '../dtos/PostProductPurchaseReqDto';
+
+export class ProductPurchaseDao {
+  public async postProductPurchase(
+    userId: number,
+    productList: PostProductPurchaseReqDto[]
+  ) {
+    let values = '';
+    productList.forEach((item, idx) => {
+      if (idx + 1 === productList.length) {
+        values += `(${userId}, ${item.productId}, ${item.quantity})`;
+      } else {
+        values += `(${userId}, ${item.productId}, ${item.quantity}), `;
+      }
+    });
+
+    const [rows, _] = await dataSource.query(
+      `INSERT INTO PRODUCT_PURCHASE(user_id, product_id, quantity) VALUES ${values}`
+    );
+  }
+}
