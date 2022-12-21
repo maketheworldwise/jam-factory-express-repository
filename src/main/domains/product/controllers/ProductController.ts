@@ -6,6 +6,9 @@ import { ProductService } from '../services/ProductService';
 
 const productService = new ProductService();
 
+const categories: string[] = ['jam', 'tea', 'snack'];
+const sorts: string[] = ['name.asc', 'name.desc', 'price.asc', 'price.desc'];
+
 export class ProductController {
   /**
    * 제품 목록 조회
@@ -21,10 +24,25 @@ export class ProductController {
    * @memberof ProductController
    */
   public async getProductList(req: Request, res: Response) {
-    // TODO: 필터링 및 정렬 기능 구현 필요
+    let category: string = '%';
+    let sort: string = 'id.asc';
+
+    const queryCategory: string = String(req.query.category);
+    const querySort: string = String(req.query.sort);
+
+    if (queryCategory !== undefined && categories.includes(queryCategory)) {
+      category = queryCategory;
+    }
+    if (querySort !== undefined && sorts.includes(querySort)) {
+      sort = querySort;
+    }
+
     const productList: object[] = await productService.getProductList(
+      category,
+      sort,
       req.pagingInfo
     );
+    console.log(productList);
 
     return res
       .status(statusCode.OK)

@@ -15,6 +15,7 @@ CREATE TABLE `USER` (
 
 CREATE TABLE `PRODUCT` (
   `id` bigint PRIMARY KEY AUTO_INCREMENT,
+  `category` varchar(45) NOT NULL,
   `name` varchar(45) NOT NULL,
   `price` int NOT NULL,
   `delivery_fee` int NOT NULL,
