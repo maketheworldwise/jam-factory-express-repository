@@ -6,10 +6,19 @@ import { PagingInfoReqDto } from '../models/dtos/PagingInfoReqDto';
 const productDao = new ProductDao();
 
 export class ProductService {
-  public async getProductList(reqPagingInfoDto: PagingInfoReqDto) {
+  public async getProductList(
+    category: string,
+    sort: string,
+    reqPagingInfoDto: PagingInfoReqDto
+  ) {
     try {
       const { page, size } = reqPagingInfoDto;
-      const rows: any = await productDao.getProductList(page, size);
+      const rows: any = await productDao.getProductList(
+        category,
+        sort,
+        page,
+        size
+      );
 
       return rows;
     } catch (err: any) {
