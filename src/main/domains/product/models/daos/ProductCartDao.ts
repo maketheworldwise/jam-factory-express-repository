@@ -7,8 +7,9 @@ export class ProductCartDao {
     const { userId, productId, quantity } = reqDto;
 
     const [rows, _] = await dataSource.query(
-      `INSERT INTO PRODUCT_CART(user_id, product_id, quantity) 
-        VALUES(?, ?, ?)`,
+      `INSERT INTO PRODUCT_CART(user_id, product_id, quantity)
+        VALUES (?, ?, ?)
+        ON DUPLICATE KEY UPDATE quantity = ${quantity}`,
       [userId, productId, quantity]
     );
 

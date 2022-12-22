@@ -14,7 +14,7 @@ export class ProductController {
    * 제품 목록 조회
    * [GET] http://localhost:8080/product
    *
-   * @version 0.0.0
+   * @version 0.1.0
    * @since 0.0.0
    * @author Kevin Ahn
    *
@@ -42,7 +42,6 @@ export class ProductController {
       sort,
       req.pagingInfo
     );
-    console.log(productList);
 
     return res
       .status(statusCode.OK)
