@@ -52,7 +52,12 @@ dbmate --url "mysql://root:password@127.0.0.1:3306/JAM_FACTORY_TEST" up
 ## Usage
 
 ```sh
+# 로컬
 nodemon server.ts --dev
+
+# 배포의 경우 package.json과 tsconfig.json 파일 수정이 필요합니다.
+# npm run build
+# npm start
 ```
 
 ## Run tests
