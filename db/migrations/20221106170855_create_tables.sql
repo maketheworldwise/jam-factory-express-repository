@@ -6,7 +6,7 @@ CREATE TABLE `USER` (
   `zip_code` varchar(5),
   `address_main` varchar(45),
   `address_sub` varchar(45),
-  `phone` varchar(11) NOT NULL,
+  `phone` varchar(15) NOT NULL,
   `email` varchar(320) NOT NULL,
   `birth` date NOT NULL,
   `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
