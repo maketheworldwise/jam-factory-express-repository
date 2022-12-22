@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import ProductInfoRequestException from '../../../exceptions/product/ProductInfoRequestException';
 import message from '../../../utils/resMessage';
 import result from '../../../utils/resObject';
 import statusCode from '../../../utils/resStatusCode';
@@ -52,7 +53,7 @@ export class ProductController {
    * 제품 상세 조회
    * [GET] http://localhost:8080/product/:productId
    *
-   * @version 0.0.0
+   * @version 0.1.0
    * @since 0.0.0
    * @author Kevin Ahn
    *
@@ -62,8 +63,12 @@ export class ProductController {
    * @memberof ProductController
    */
   public async getProduct(req: Request, res: Response) {
-    const productId = req.params.productId;
-    const product = await productService.getProduct(Number(productId));
+    const productId = Number(req.params.productId);
+    if (!productId) {
+      throw new ProductInfoRequestException(message.PRODUCT_INFO_REQUEST_ERROR);
+    }
+
+    const product = await productService.getProduct(productId);
 
     return res
       .status(statusCode.OK)

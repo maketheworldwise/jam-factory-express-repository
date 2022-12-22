@@ -32,6 +32,7 @@ const message = {
   SIGN_OUT_FAILED: '로그아웃을 실패했습니다.',
 
   // 제품 메시지
+  PRODUCT_INFO_REQUEST_ERROR: '제품 요청에 필요한 정보가 올바르지 않습니다.',
   GET_PRODUCT_LIST_SUCCESS: '제품 목록 조회에 성공했습니다.',
   GET_PRODUCT_LIST_FAILED: '제품 목록 조회에 실패했습니다.',
 
