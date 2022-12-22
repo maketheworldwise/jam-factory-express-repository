@@ -2,6 +2,7 @@ import ProductReviewFetchFailedException from '../../../exceptions/product/Produ
 import ProductReviewRegisterFailedException from '../../../exceptions/product/ProductReviewRegisterFailedException';
 import message from '../../../utils/resMessage';
 import { ProductReviewDao } from '../models/daos/ProductReviewDao';
+import { PagingInfoReqDto } from '../models/dtos/PagingInfoReqDto';
 import { PostProductReviewReqDto } from '../models/dtos/PostProductReviewReqDto';
 
 const productReviewDao = new ProductReviewDao();
@@ -27,9 +28,17 @@ export class ProductReviewService {
     }
   }
 
-  public async getProductReviewList(productId: number) {
+  public async getProductReviewList(
+    productId: number,
+    reqPagingInfoDto: PagingInfoReqDto
+  ) {
     try {
-      const rows = await productReviewDao.getProductReview(productId);
+      const { page, size } = reqPagingInfoDto;
+      const rows = await productReviewDao.getProductReview(
+        productId,
+        page,
+        size
+      );
 
       return rows;
     } catch (err: any) {
