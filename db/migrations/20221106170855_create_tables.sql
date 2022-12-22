@@ -6,7 +6,7 @@ CREATE TABLE `USER` (
   `zip_code` varchar(5),
   `address_main` varchar(45),
   `address_sub` varchar(45),
-  `phone` varchar(11) NOT NULL,
+  `phone` varchar(15) NOT NULL,
   `email` varchar(320) NOT NULL,
   `birth` date NOT NULL,
   `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
@@ -15,6 +15,7 @@ CREATE TABLE `USER` (
 
 CREATE TABLE `PRODUCT` (
   `id` bigint PRIMARY KEY AUTO_INCREMENT,
+  `category` varchar(45) NOT NULL,
   `name` varchar(45) NOT NULL,
   `price` int NOT NULL,
   `delivery_fee` int NOT NULL,
@@ -61,6 +62,7 @@ ALTER TABLE `PRODUCT_PURCHASE` ADD FOREIGN KEY (`user_id`) REFERENCES `USER` (`i
 
 ALTER TABLE `PRODUCT_PURCHASE` ADD FOREIGN KEY (`product_id`) REFERENCES `PRODUCT` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
+ALTER TABLE `PRODUCT_CART` ADD UNIQUE KEY pc_uk (`user_id`, `product_id`);
 
 -- migrate:down
 DROP TABLE `PRODUCT_PURCHASE`;

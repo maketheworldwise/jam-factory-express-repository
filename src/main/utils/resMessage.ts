@@ -32,6 +32,7 @@ const message = {
   SIGN_OUT_FAILED: '로그아웃을 실패했습니다.',
 
   // 제품 메시지
+  PRODUCT_INFO_REQUEST_ERROR: '제품 요청에 필요한 정보가 올바르지 않습니다.',
   GET_PRODUCT_LIST_SUCCESS: '제품 목록 조회에 성공했습니다.',
   GET_PRODUCT_LIST_FAILED: '제품 목록 조회에 실패했습니다.',
 
@@ -59,8 +60,9 @@ const message = {
 
   PRODUCT_REVIEW_INFO_REQUEST_ERROR:
     '제품 후기에 필요한 정보가 올바르지 않습니다.',
-  POST_PRODUCT_REVIEW_SUCCESS: '제품 후기 작성을 성공했습니다.',
-  POST_PRODUCT_REVIEW_FAILED: '제품 후기 작성을 실패했습니다.',
+  PRODUCT_NOT_PURCHASED_ERROR: '제품 구매자만 후기를 작성할 수 있습니다.',
+  POST_PRODUCT_REVIEW_SUCCESS: '제품 후기 등록을 성공했습니다.',
+  POST_PRODUCT_REVIEW_FAILED: '제품 후기 등록을 실패했습니다.',
 
   GET_PRODUCT_REVIEW_LIST_SUCCESS: '제품 후기 목록 조회에 성공했습니다.',
   GET_PRODUCT_REVIEW_LIST_FAILED: '제품 후기 목록 조회에 실패했습니다.',

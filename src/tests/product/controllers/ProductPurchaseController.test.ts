@@ -14,7 +14,7 @@ describe('ProductPurchaseController Test', () => {
     await request(app).post('/sign-up').send({
       nickname: 'kevin',
       password: '12345',
-      phone: '01012345678',
+      phone: '010-1234-5678',
       birth: '1994-11-22',
       email: 'kevin@example.com',
     });

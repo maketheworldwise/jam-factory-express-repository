@@ -1,10 +1,10 @@
 import RunTimeException from '../../exceptions/RunTimeException';
 import statusCode from '../../utils/resStatusCode';
 
-class UserNotFoundException extends RunTimeException {
+class TokenHostFetchFailedException extends RunTimeException {
   constructor(message: string) {
-    super(statusCode.NOT_FOUND, message);
+    super(statusCode.DB_ERROR, message);
   }
 }
 
-export default UserNotFoundException;
+export default TokenHostFetchFailedException;

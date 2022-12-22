@@ -14,7 +14,7 @@ describe('ProductReviewController Test', () => {
     await request(app).post('/sign-up').send({
       nickname: 'kevin',
       password: '12345',
-      phone: '01012345678',
+      phone: '010-1234-5678',
       birth: '1994-11-22',
       email: 'kevin@example.com',
     });
@@ -75,6 +75,8 @@ describe('ProductReviewController Test', () => {
   });
 
   test('제품 후기 목록 조회', async () => {
-    await request(app).get('/review/product/1').expect(statusCode.OK);
+    await request(app)
+      .get('/review/product/1?page=0&size=1')
+      .expect(statusCode.OK);
   });
 });

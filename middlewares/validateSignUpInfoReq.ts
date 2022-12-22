@@ -28,11 +28,11 @@ const validateSignUpInfoReq = async (
       isValid.password = regPassword.test(password);
     }
     if (phone) {
-      const regPhone = /^01([0|1|6|7|8|9]?)-?([0-9]{3,4})-?([0-9]{4})$/;
+      const regPhone = /^01([0|1|6|7|8|9]?)-([0-9]{3,4})-([0-9]{4})$/;
       isValid.phone = regPhone.test(phone);
     }
     if (birth) {
-      const regBirth = /^[0-9]{4}-?([0-9]{2})-?([0-9]{2})$/;
+      const regBirth = /^[0-9]{4}-([0-9]{2})-([0-9]{2})$/;
       isValid.birth = regBirth.test(birth);
     }
     if (email) {

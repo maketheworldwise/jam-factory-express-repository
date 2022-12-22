@@ -7,8 +7,9 @@ export class ProductCartDao {
     const { userId, productId, quantity } = reqDto;
 
     const [rows, _] = await dataSource.query(
-      `INSERT INTO PRODUCT_CART(user_id, product_id, quantity) 
-        VALUES(?, ?, ?)`,
+      `INSERT INTO PRODUCT_CART(user_id, product_id, quantity)
+        VALUES (?, ?, ?)
+        ON DUPLICATE KEY UPDATE quantity = ${quantity}`,
       [userId, productId, quantity]
     );
 
@@ -40,6 +41,13 @@ export class ProductCartDao {
       `UPDATE PRODUCT_CART SET quantity = ? 
         WHERE user_id = ? AND product_id = ?`,
       [quantity, userId, productId]
+    );
+  }
+
+  public async patchProductCartQuantity0(userId: number, productId: number) {
+    await dataSource.query(
+      `DELETE FROM PRODUCT_CART WHERE user_id = ? AND product_id = ?`,
+      [userId, productId]
     );
   }
 
