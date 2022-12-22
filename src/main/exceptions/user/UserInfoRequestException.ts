@@ -1,10 +1,10 @@
 import RunTimeException from '../../exceptions/RunTimeException';
 import statusCode from '../../utils/resStatusCode';
 
-class UserNotFoundException extends RunTimeException {
+class UserInfoRequestException extends RunTimeException {
   constructor(message: string) {
-    super(statusCode.NOT_FOUND, message);
+    super(statusCode.BAD_REQUEST, message);
   }
 }
 
-export default UserNotFoundException;
+export default UserInfoRequestException;
