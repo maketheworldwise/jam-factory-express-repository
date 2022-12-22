@@ -27,8 +27,6 @@ export class ProductCartController {
    * @memberof ProductCartController
    */
   public async postProductCart(req: Request, res: Response) {
-    // TODO: 장바구니에 중복된 제품을 등록할 경우에 대한 로직 구현 필요
-
     const userId: number = req.userId;
     const productId: number = Number(req.params.productId);
     const quantity: number = req.body.quantity;
