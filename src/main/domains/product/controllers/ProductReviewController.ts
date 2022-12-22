@@ -13,7 +13,7 @@ export class ProductReviewController {
    * 제품 후기 등록
    * [POST] http://localhost:8080/review/product/:productId
    *
-   * @version 0.0.0
+   * @version 0.1.0
    * @since 0.0.0
    * @author Kevin Ahn
    *
@@ -23,13 +23,11 @@ export class ProductReviewController {
    * @memberof ProductReviewController
    */
   public async postProductReview(req: Request, res: Response) {
-    // TODO: 구매 여부에 따른 후기 등록 로직 처리 필요
-
     const userId: number = req.userId;
     const productId: number = Number(req.params.productId);
     const reqDto: PostProductReviewReqDto = req.body;
 
-    if (!userId || !productId || !reqDto) {
+    if (!userId || !productId || !reqDto.rating || !reqDto.content) {
       throw new ProductReviewRegisterFailedException(
         message.PRODUCT_REVIEW_INFO_REQUEST_ERROR
       );
@@ -49,7 +47,7 @@ export class ProductReviewController {
    * 제품 후기 목록 조회
    * [GET] http://localhost:8080/review/product/:productId
    *
-   * @version 0.0.0
+   * @version 0.1.0
    * @since 0.0.0
    * @author Kevin Ahn
    *
