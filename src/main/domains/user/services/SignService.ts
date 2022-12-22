@@ -19,6 +19,7 @@ import UserFetchFailedException from '../../../exceptions/user/UserFetchFailedEx
 import TokenHostMisMatchException from '../../../exceptions/user/TokenHostMisMatchException';
 import SignOutFailedException from '../../../exceptions/user/SignOutFailedException';
 import NicknameDuplicateException from '../../../exceptions/user/NicknameDuplicateException';
+import TokenHostFetchFailedException from '../../../exceptions/user/TokenHostFetchFailedException';
 
 const signDao = new SignDao();
 
@@ -50,14 +51,15 @@ export class SignService {
 
     try {
       const rows: any = await signDao.signIn(reqBodyDto.nickname);
+
       userId = rows[0].id;
       password = rows[0].password;
     } catch (err: any) {
       throw new SignInFailedException(message.SIGN_IN_FAILED);
     }
 
-    if (!userId || bcrypt.compareSync(reqBodyDto.password, password)) {
-      throw new SignInFailedException(message.USER_NOT_FOUND_ERROR);
+    if (!userId || !bcrypt.compareSync(reqBodyDto.password, password)) {
+      throw new UserNotFoundException(message.USER_NOT_FOUND_ERROR);
     }
 
     return this.registerToken(userId, reqHeaderDto);
@@ -157,6 +159,8 @@ export class SignService {
   }
 
   public async verifyTokenHost(userId: number, reqHeaderDto: HeaderInfoReqDto) {
+    let isValidHost: boolean = false;
+
     try {
       await this.verifyTokenUser(userId);
 
@@ -165,13 +169,13 @@ export class SignService {
         reqHeaderDto.accessToken,
         reqHeaderDto.refreshToken
       );
-      const isValidHost: boolean = rows[0].isValidHost;
-
-      if (!isValidHost) {
-        throw new TokenHostMisMatchException(message.TOKEN_HOST_MISMATCH_ERROR);
-      }
+      isValidHost = rows[0].isValidHost;
     } catch (err: any) {
-      throw new TokenHostMisMatchException(message.TOKEN_HOST_FETCH_FAILED);
+      throw new TokenHostFetchFailedException(message.TOKEN_HOST_FETCH_FAILED);
+    }
+
+    if (!isValidHost) {
+      throw new TokenHostMisMatchException(message.TOKEN_HOST_MISMATCH_ERROR);
     }
   }
 }

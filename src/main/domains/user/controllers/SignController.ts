@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import UserInfoRequestException from '../../../exceptions/user/UserInfoRequestException';
 import {
   REFRESH_TOKEN_COOKIE_OPTIONS,
   REFRESH_TOKEN_TYPE,
@@ -41,7 +42,7 @@ export class SignController {
    * 로그인
    * [POST] http://localhost:8080/sign-in
    *
-   * @version 0.0.0
+   * @version 0.1.0
    * @since 0.0.0
    * @author Kevin Ahn
    *
@@ -53,6 +54,10 @@ export class SignController {
   public async signIn(req: Request, res: Response) {
     const reqHeaderDto: HeaderInfoReqDto = req.headerInfo;
     const reqBodyDto: SignInReqDto = req.body;
+
+    if (!reqBodyDto.nickname || !reqBodyDto.password) {
+      throw new UserInfoRequestException(message.USER_INFO_REQUEST_ERROR);
+    }
 
     const { accessToken, refreshToken } = await signService.signIn(
       reqHeaderDto,
@@ -93,10 +98,10 @@ export class SignController {
   }
 
   /**
-   * Nickname 검증
+   * 아이디 중복 확인
    * [GET] http://localhost:8080/verify-nickname/:nickname
    *
-   * @version 0.0.0
+   * @version 0.1.0
    * @since 0.0.0
    * @author Kevin Ahn
    *
@@ -107,6 +112,9 @@ export class SignController {
    */
   public async verifyNickname(req: Request, res: Response) {
     const nickname: string = req.params.nickname;
+    if (!nickname || nickname.trim() === '') {
+      throw new UserInfoRequestException(message.USER_INFO_REQUEST_ERROR);
+    }
 
     await signService.verifyNickname(nickname);
 
@@ -140,7 +148,7 @@ export class SignController {
    * 토큰 재발급 (자동 로그인)
    * [POST] http://localhost:8080/reissue-token
    *
-   * @version 0.0.0
+   * @version 0.1.0
    * @since 0.0.0
    * @author Kevin Ahn
    *

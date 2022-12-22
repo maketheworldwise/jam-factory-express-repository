@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import ProductReviewRegisterFailedException from '../../../exceptions/product/ProductReviewRegisterFailedException';
+import ProductReviewInfoRequestException from '../../../exceptions/product/ProductReviewInfoRequestException';
 import message from '../../../utils/resMessage';
 import result from '../../../utils/resObject';
 import statusCode from '../../../utils/resStatusCode';
@@ -28,7 +28,7 @@ export class ProductReviewController {
     const reqDto: PostProductReviewReqDto = req.body;
 
     if (!userId || !productId || !reqDto.rating || !reqDto.content) {
-      throw new ProductReviewRegisterFailedException(
+      throw new ProductReviewInfoRequestException(
         message.PRODUCT_REVIEW_INFO_REQUEST_ERROR
       );
     }
