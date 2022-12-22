@@ -29,7 +29,7 @@ export class ProductCartController {
     const productId: number = Number(req.params.productId);
     const quantity: number = req.body.quantity;
 
-    if (!userId || !productId) {
+    if (!userId || !productId || quantity === undefined) {
       throw new ProductCartInfoRequestException(
         message.PRODUCT_CART_INFO_REQUEST_ERROR
       );
