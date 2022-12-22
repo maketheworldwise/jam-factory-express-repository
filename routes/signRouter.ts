@@ -18,7 +18,6 @@ signRouter.post(
 signRouter.post(
   '/sign-in',
   setHeaderInfoInReq,
-  encryptPasswordReq,
   asyncWrapper(signController.signIn)
 );
 signRouter.post(

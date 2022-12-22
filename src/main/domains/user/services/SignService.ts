@@ -51,13 +51,14 @@ export class SignService {
 
     try {
       const rows: any = await signDao.signIn(reqBodyDto.nickname);
+
       userId = rows[0].id;
       password = rows[0].password;
     } catch (err: any) {
       throw new SignInFailedException(message.SIGN_IN_FAILED);
     }
 
-    if (!userId || bcrypt.compareSync(reqBodyDto.password, password)) {
+    if (!userId || !bcrypt.compareSync(reqBodyDto.password, password)) {
       throw new UserNotFoundException(message.USER_NOT_FOUND_ERROR);
     }
 

@@ -55,6 +55,10 @@ export class SignController {
     const reqHeaderDto: HeaderInfoReqDto = req.headerInfo;
     const reqBodyDto: SignInReqDto = req.body;
 
+    if (!reqBodyDto.nickname || !reqBodyDto.password) {
+      throw new UserInfoRequestException(message.USER_INFO_REQUEST_ERROR);
+    }
+
     const { accessToken, refreshToken } = await signService.signIn(
       reqHeaderDto,
       reqBodyDto
