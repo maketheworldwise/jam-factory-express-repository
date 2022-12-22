@@ -1,8 +1,10 @@
 import { Request, Response } from 'express';
 import ProductCartDeleteFailedException from '../../../exceptions/product/ProductCartDeleteFailedException';
 import ProductCartFetchFailedException from '../../../exceptions/product/ProductCartFetchFailedException';
+import ProductCartInfoRequestException from '../../../exceptions/product/ProductCartInfoRequestException';
 import ProductCartRegisterFailedException from '../../../exceptions/product/ProductCartRegisterFailedException';
 import ProductCartUpdateFailedException from '../../../exceptions/product/ProductCartUpdateFailedException';
+import ProductInfoRequestException from '../../../exceptions/product/ProductInfoRequestException';
 import message from '../../../utils/resMessage';
 import result from '../../../utils/resObject';
 import statusCode from '../../../utils/resStatusCode';
@@ -32,7 +34,7 @@ export class ProductCartController {
     const quantity: number = req.body.quantity;
 
     if (!userId || !productId) {
-      throw new ProductCartRegisterFailedException(
+      throw new ProductCartInfoRequestException(
         message.PRODUCT_CART_INFO_REQUEST_ERROR
       );
     }
@@ -58,7 +60,7 @@ export class ProductCartController {
    * 제품 장바구니 목록 조회
    * [GET] http://localhost:8080/cart/product
    *
-   * @version 0.0.0
+   * @version 0.1.0
    * @since 0.0.0
    * @author Kevin Ahn
    *
@@ -71,7 +73,7 @@ export class ProductCartController {
     const userId: number = req.userId;
 
     if (!userId) {
-      throw new ProductCartFetchFailedException(
+      throw new ProductInfoRequestException(
         message.PRODUCT_CART_INFO_REQUEST_ERROR
       );
     }
@@ -107,7 +109,7 @@ export class ProductCartController {
     const quantity: number = req.body.quantity;
 
     if (!userId || !productId || quantity === undefined) {
-      throw new ProductCartUpdateFailedException(
+      throw new ProductCartInfoRequestException(
         message.PRODUCT_CART_INFO_REQUEST_ERROR
       );
     }
@@ -137,7 +139,7 @@ export class ProductCartController {
    * 제품 장바구니 삭제
    * [DELETE] http://localhost:8080/cart/:productCartId
    *
-   * @version 0.0.0
+   * @version 0.1.0
    * @since 0.0.0
    * @author Kevin Ahn
    *
@@ -151,7 +153,7 @@ export class ProductCartController {
     const productCartId: number = Number(req.params.productCartId);
 
     if (!userId || !productCartId) {
-      throw new ProductCartDeleteFailedException(
+      throw new ProductInfoRequestException(
         message.PRODUCT_CART_INFO_REQUEST_ERROR
       );
     }

@@ -3,7 +3,7 @@ import statusCode from '../../utils/resStatusCode';
 
 class ProductCartUpdateFailedException extends RunTimeException {
   constructor(message: string) {
-    super(statusCode.BAD_REQUEST, message);
+    super(statusCode.DB_ERROR, message);
   }
 }
 
