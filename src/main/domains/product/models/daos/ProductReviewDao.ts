@@ -18,7 +18,7 @@ export class ProductReviewDao {
     return rows;
   }
 
-  public async getProductReview(productId: number) {
+  public async getProductReview(productId: number, page: number, size: number) {
     const [rows, _] = await dataSource.query(
       `SELECT
         pr.id,
@@ -32,8 +32,9 @@ export class ProductReviewDao {
       FROM PRODUCT_REVIEW pr 
       INNER JOIN USER u ON pr.user_id = u.id
       WHERE pr.product_id = ?
-      ORDER BY pr.created_at DESC`,
-      [productId]
+      ORDER BY pr.created_at DESC
+      LIMIT ?, ?`,
+      [productId, page * size, size]
     );
 
     return rows;

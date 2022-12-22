@@ -75,6 +75,8 @@ describe('ProductReviewController Test', () => {
   });
 
   test('제품 후기 목록 조회', async () => {
-    await request(app).get('/review/product/1').expect(statusCode.OK);
+    await request(app)
+      .get('/review/product/1?page=0&size=1')
+      .expect(statusCode.OK);
   });
 });

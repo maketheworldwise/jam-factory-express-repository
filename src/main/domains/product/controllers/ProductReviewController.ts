@@ -62,7 +62,10 @@ export class ProductReviewController {
     const productId: number = Number(req.params.productId);
 
     const productReviewList: any =
-      await productReviewService.getProductReviewList(productId);
+      await productReviewService.getProductReviewList(
+        productId,
+        req.pagingInfo
+      );
 
     return res
       .status(statusCode.OK)
