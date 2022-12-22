@@ -11,17 +11,20 @@ const productCartDao = new ProductCartDao();
 
 export class ProductCartService {
   public async postProductCart(reqDto: PostProductCartReqDto) {
+    // 장바구니에 없는 제품일 경우 새로 등록
+    // 장바구니에 있는 제품일 경우 새로 요청한 수량으로 업데이트
+
     try {
       const rows: any = await productCartDao.postProductCart(reqDto);
-      const userId: number = rows.insertId;
+      const productId: number = rows.insertId;
 
-      if (!userId) {
+      if (!productId) {
         throw new ProductCartRegisterFailedException(
           message.POST_PRODUCT_CART_FAILED
         );
       }
 
-      return userId;
+      return productId;
     } catch (err: any) {
       throw new ProductCartRegisterFailedException(
         message.POST_PRODUCT_CART_FAILED

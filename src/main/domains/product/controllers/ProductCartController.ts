@@ -17,7 +17,7 @@ export class ProductCartController {
    * 제품 장바구니 등록
    * [POST] http://localhost:8080/cart/product/:productId
    *
-   * @version 0.0.0
+   * @version 0.1.0
    * @since 0.0.0
    * @author Kevin Ahn
    *
@@ -33,7 +33,7 @@ export class ProductCartController {
     const productId: number = Number(req.params.productId);
     const quantity: number = req.body.quantity;
 
-    if (!productId || !userId) {
+    if (!userId || !productId) {
       throw new ProductCartRegisterFailedException(
         message.PRODUCT_CART_INFO_REQUEST_ERROR
       );
