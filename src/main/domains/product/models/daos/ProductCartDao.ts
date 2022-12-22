@@ -44,6 +44,13 @@ export class ProductCartDao {
     );
   }
 
+  public async patchProductCartQuantity0(userId: number, productId: number) {
+    await dataSource.query(
+      `DELETE FROM PRODUCT_CART WHERE user_id = ? AND product_id = ?`,
+      [userId, productId]
+    );
+  }
+
   public async deleteProductCart(productCartId: number) {
     await dataSource.query(`DELETE FROM PRODUCT_CART WHERE id = ?`, [
       productCartId,

@@ -90,7 +90,7 @@ export class ProductCartController {
    * 제품 장바구니 수정
    * [PATCH] http://localhost:8080/cart/product/:productId
    *
-   * @version 0.0.0
+   * @version 0.1.0
    * @since 0.0.0
    * @author Kevin Ahn
    *
@@ -100,29 +100,37 @@ export class ProductCartController {
    * @memberof ProductCartController
    */
   public async patchProductCart(req: Request, res: Response) {
-    // TODO: 수량이 0일 경우에 대한 로직 구현 필요
+    // 수량이 0일 경우에는 장바구니에서 삭제
 
     const userId: number = req.userId;
     const productId: number = Number(req.params.productId);
     const quantity: number = req.body.quantity;
 
-    if (!userId || !productId || !quantity) {
+    if (!userId || !productId || quantity === undefined) {
       throw new ProductCartUpdateFailedException(
         message.PRODUCT_CART_INFO_REQUEST_ERROR
       );
     }
 
-    const reqDto: PatchProductCartReqDto = {
-      userId,
-      productId,
-      quantity,
-    };
+    if (quantity === 0) {
+      await productCartService.patchProductCartQuantity0(userId, productId);
+    } else {
+      const reqDto: PatchProductCartReqDto = {
+        userId,
+        productId,
+        quantity,
+      };
 
-    await productCartService.patchProductCart(reqDto);
+      await productCartService.patchProductCart(reqDto);
+    }
 
-    return res
-      .status(statusCode.OK)
-      .send(result.success(message.PATCH_PRODUCT_CART_SUCCESS, reqDto));
+    return res.status(statusCode.OK).send(
+      result.success(message.PATCH_PRODUCT_CART_SUCCESS, {
+        userId,
+        productId,
+        quantity,
+      })
+    );
   }
 
   /**

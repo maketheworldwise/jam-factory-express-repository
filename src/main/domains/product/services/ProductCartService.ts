@@ -54,6 +54,16 @@ export class ProductCartService {
     }
   }
 
+  public async patchProductCartQuantity0(userId: number, productId: number) {
+    try {
+      await productCartDao.patchProductCartQuantity0(userId, productId);
+    } catch (err: any) {
+      throw new ProductCartUpdateFailedException(
+        message.PATCH_PRODUCT_CART_FAILED
+      );
+    }
+  }
+
   public async deleteProductCart(productCartId: number) {
     try {
       await productCartDao.deleteProductCart(productCartId);
