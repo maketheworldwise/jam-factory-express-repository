@@ -20,4 +20,14 @@ export class ProductPurchaseDao {
         VALUES ${values}`
     );
   }
+
+  public async verifyProductPurchase(userId: number, productId: number) {
+    const [rows, _] = await dataSource.query(
+      `SELECT EXISTS(
+        SELECT id FROM PRODUCT_PURCHASE WHERE user_id = ? AND product_id = ?) AS isProductPurchased`,
+      [userId, productId]
+    );
+
+    return rows;
+  }
 }
