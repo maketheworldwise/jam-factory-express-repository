@@ -1,6 +1,5 @@
 import { Request, Response } from 'express';
 import ProductReviewInfoRequestException from '../../../exceptions/product/ProductReviewInfoRequestException';
-import ProductReviewRegisterFailedException from '../../../exceptions/product/ProductReviewRegisterFailedException';
 import message from '../../../utils/resMessage';
 import result from '../../../utils/resObject';
 import statusCode from '../../../utils/resStatusCode';

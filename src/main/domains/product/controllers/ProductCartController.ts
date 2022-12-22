@@ -1,9 +1,5 @@
 import { Request, Response } from 'express';
-import ProductCartDeleteFailedException from '../../../exceptions/product/ProductCartDeleteFailedException';
-import ProductCartFetchFailedException from '../../../exceptions/product/ProductCartFetchFailedException';
 import ProductCartInfoRequestException from '../../../exceptions/product/ProductCartInfoRequestException';
-import ProductCartRegisterFailedException from '../../../exceptions/product/ProductCartRegisterFailedException';
-import ProductCartUpdateFailedException from '../../../exceptions/product/ProductCartUpdateFailedException';
 import ProductInfoRequestException from '../../../exceptions/product/ProductInfoRequestException';
 import message from '../../../utils/resMessage';
 import result from '../../../utils/resObject';

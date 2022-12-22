@@ -1,5 +1,4 @@
 import { Request, Response } from 'express';
-import ProductPurchaseFailedException from '../../../exceptions/product/ProductPurchaseFailedException';
 import ProductPurchaseInfoRequestException from '../../../exceptions/product/ProductPurchaseInfoRequestException';
 import message from '../../../utils/resMessage';
 import result from '../../../utils/resObject';

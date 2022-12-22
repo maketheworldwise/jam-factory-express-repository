@@ -21,6 +21,8 @@
 
 ## Install
 
+Docker와 dbmate은 기본적으로 설치되어있다는 가정하에 작성했습니다.
+
 **Dependencies 설치** :
 
 ```sh
@@ -50,12 +52,13 @@ dbmate --url "mysql://root:password@127.0.0.1:3306/JAM_FACTORY_TEST" up
 ## Usage
 
 ```sh
-# 아직 개발 단계이기에 사용법에 대한 내용은 추후에 추가될 예정입니다.
+nodemon server.ts --dev
 ```
 
 ## Run tests
 
 ```sh
+# JAM_FACTORY_TEST 데이터베이스가 온전히 만들어져있다 가정
 npm run test
 ```
 
