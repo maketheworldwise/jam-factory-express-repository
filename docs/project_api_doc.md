@@ -565,20 +565,28 @@ Authorization: Bearer { Json Web Token }
     "message": "장바구니 목록 조회에 성공했습니다.",
     "data": [
         {
-            "id": 2,
+            "id": 4,
             "userId": 1,
-            "productId": 12,
-            "quantity": 20,
-            "createdAt": "2022-12-22T02:52:47.000Z",
-            "updatedAt": "2022-12-22T02:52:47.000Z"
+            "productId": 3,
+            "productName": "[복음자리] 딸기잼 500g",
+            "productPrice": 7190,
+            "productDeliveryFee": 3000,
+            "productImageUrl": " http://localhost:8080/data/images/jam_3.jpeg",
+            "quantity": 10,
+            "createdAt": "2023-01-14T23:48:30.000Z",
+            "updatedAt": "2023-01-14T23:48:30.000Z"
         },
         {
-            "id": 1,
+            "id": 3,
             "userId": 1,
-            "productId": 1,
-            "quantity": 20,
-            "createdAt": "2022-12-22T02:22:53.000Z",
-            "updatedAt": "2022-12-22T02:23:11.000Z"
+            "productId": 2,
+            "productName": "[복음자리] 사과잼 220g",
+            "productPrice": 3570,
+            "productDeliveryFee": 3000,
+            "productImageUrl": " http://localhost:8080/data/images/jam_2.jpeg",
+            "quantity": 10,
+            "createdAt": "2023-01-14T23:47:11.000Z",
+            "updatedAt": "2023-01-14T23:47:11.000Z"
         }
     ]
 }
@@ -728,7 +736,7 @@ Authorization: Bearer { Json Web Token }
 **Request**
 
 ```
-[POST] http://localhost:8080/cart/:productCartId
+[POST] http://localhost:8080/purchase/product
 
 Authorization: Bearer { Json Web Token }
 

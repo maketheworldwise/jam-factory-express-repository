@@ -19,13 +19,18 @@ export class ProductCartDao {
   public async getProductCartList(userId: number) {
     const [rows, _] = await dataSource.query(
       `SELECT 
-        id, 
-        user_id AS userId, 
-        product_id AS productId, 
-        quantity, 
-        created_at AS createdAt, 
-        updated_at AS updatedAt
-      FROM PRODUCT_CART 
+        pc.id, 
+        pc.user_id AS userId, 
+        p.id AS productId,
+        p.name AS productName,
+        p.price AS productPrice,
+        p.delivery_fee AS productDeliveryFee,
+        p.image_url AS productImageUrl,
+        pc.quantity, 
+        pc.created_at AS createdAt, 
+        pc.updated_at AS updatedAt
+      FROM PRODUCT_CART AS pc
+      INNER JOIN PRODUCT AS p ON pc.product_id = p.id
       WHERE user_id = ?
       ORDER BY created_at DESC`,
       [userId]
